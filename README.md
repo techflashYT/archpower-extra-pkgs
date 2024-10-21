@@ -13,5 +13,5 @@ To use my repo, simply add the following to your pacman.conf
 
 ```
 [extra]
-Server = https://arch.packages.wii-linux.org/extra/$arch
+Server = https://repo.wii-linux.org/arch/extra/$arch
 ```
