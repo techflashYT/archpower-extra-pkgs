@@ -1,0 +1,34 @@
+# Maintainer: Carl Smedstad <carsme@archlinux.org>
+# Contributor: Luis Martinez <luis dot martinez at disroot dot org>
+# Contributor: Dr-Noob <peibolms at gmail dot com>
+
+pkgname=cpufetch
+pkgver=1.06
+pkgrel=3
+pkgdesc="Simple yet fancy CPU architecture fetching tool"
+arch=(x86_64 powerpc)
+url="https://github.com/Dr-Noob/cpufetch"
+license=(MIT)
+depends=(glibc)
+source=(
+  "$pkgname-$pkgver.tar.gz::$url/archive/v$pkgver.tar.gz"
+  "fix-manpage-file-extension.patch::$url/commit/807a13d29ef0dfe5c27dfe9fe142695cafc98997.patch"
+)
+sha256sums=('b8ec1339cf3a3bb9325cde7fb0748dd609043e8d2938c292956da7e457bdb7d9'
+            '74eed7e91633293694633ddf14678fb1f2e647faf466b2502309f5c69b2aeb6e')
+
+prepare() {
+  cd $pkgname-$pkgver
+  patch -Np1 < ../fix-manpage-file-extension.patch
+  sed -i 's/cpufetch-git/cpufetch/g' Makefile
+}
+
+build() {
+  cd $pkgname-$pkgver
+  CFLAGS="$CFLAGS $LDFLAGS" make GIT_VERSION="$pkgver"
+}
+
+package() {
+  cd $pkgname-$pkgver
+  make DESTDIR="$pkgdir" install
+}

@@ -1,0 +1,14 @@
+pkgbase = cpufetch
+	pkgdesc = Simple yet fancy CPU architecture fetching tool
+	pkgver = 1.06
+	pkgrel = 3
+	url = https://github.com/Dr-Noob/cpufetch
+	arch = x86_64
+	license = MIT
+	depends = glibc
+	source = cpufetch-1.06.tar.gz::https://github.com/Dr-Noob/cpufetch/archive/v1.06.tar.gz
+	source = fix-manpage-file-extension.patch::https://github.com/Dr-Noob/cpufetch/commit/807a13d29ef0dfe5c27dfe9fe142695cafc98997.patch
+	sha256sums = b8ec1339cf3a3bb9325cde7fb0748dd609043e8d2938c292956da7e457bdb7d9
+	sha256sums = 74eed7e91633293694633ddf14678fb1f2e647faf466b2502309f5c69b2aeb6e
+
+pkgname = cpufetch

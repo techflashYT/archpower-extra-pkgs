@@ -1,0 +1,4 @@
+[cpufetch]
+source = "git"
+git = "https://github.com/Dr-Noob/cpufetch"
+prefix = "v"

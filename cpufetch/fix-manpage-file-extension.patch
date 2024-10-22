@@ -1,0 +1,25 @@
+From 807a13d29ef0dfe5c27dfe9fe142695cafc98997 Mon Sep 17 00:00:00 2001
+From: Dr-Noob <peibolms@gmail.com>
+Date: Wed, 28 Aug 2024 21:33:48 +0100
+Subject: [PATCH] [v1.06] Fix manpage file extension (fixes #269)
+
+---
+ Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 6e7d0856..142a9b0f 100644
+--- a/Makefile
++++ b/Makefile
+@@ -120,9 +120,9 @@ clean:
+ install: $(OUTPUT)
+ 	install -Dm755 "cpufetch"   "$(DESTDIR)$(PREFIX)/bin/cpufetch"
+ 	install -Dm644 "LICENSE"    "$(DESTDIR)$(PREFIX)/share/licenses/cpufetch-git/LICENSE"
+-	install -Dm644 "cpufetch.1" "$(DESTDIR)$(PREFIX)/share/man/man1/cpufetch.1.gz"
++	install -Dm644 "cpufetch.1" "$(DESTDIR)$(PREFIX)/share/man/man1/cpufetch.1"
+ 
+ uninstall:
+ 	rm -f "$(DESTDIR)$(PREFIX)/bin/cpufetch"
+ 	rm -f "$(DESTDIR)$(PREFIX)/share/licenses/cpufetch-git/LICENSE"
+-	rm -f "$(DESTDIR)$(PREFIX)/share/man/man1/cpufetch.1.gz"
++	rm -f "$(DESTDIR)$(PREFIX)/share/man/man1/cpufetch.1"
