@@ -1,0 +1,3 @@
+[feh]
+source = "git"
+git = "https://git.finalrewind.org/feh"
