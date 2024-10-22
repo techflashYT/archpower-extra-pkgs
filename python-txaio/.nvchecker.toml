@@ -1,0 +1,3 @@
+[python-txaio]
+source = "pypi"
+pypi = "txaio"

@@ -1,0 +1,46 @@
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Contributor: Anatol Pomozov
+
+pkgname=python-txaio
+# https://github.com/crossbario/txaio/blob/master/docs/releases.rst
+pkgver=23.1.1
+pkgrel=4
+pkgdesc='Compatibility API between asyncio/Twisted/Trollius'
+arch=('any')
+url="https://github.com/crossbario/txaio"
+license=('MIT')
+depends=('python')
+makedepends=('git' 'python-build' 'python-installer' 'python-setuptools' 'python-wheel')
+# python-tests is used here:
+# https://github.com/crossbario/txaio/blob/v20.1.1/test/_asyncio_test_utils.py#L35
+#checkdepends=('python-pytest' 'python-twisted' 'python-tests')
+optdepends=(
+  'python-twisted: Twisted support'
+  'python-zope-interface: Twisted support'
+)
+source=("git+https://github.com/crossbario/txaio.git#tag=v$pkgver")
+sha512sums=('ae0a25cb2d0b7e5c459650a83c388d7bae6000c3a0c909cc00994d8b5ac595800e97b55cbc9afe968b2bcd914657ec6c5d2b6a68333dde8872bb8211d981f5f8')
+
+prepare() {
+  # This tests whether pip can install the sdist, and is completely broken
+  # except in their boutique setup. They won't fix it.
+  # https://github.com/crossbario/txaio/issues/77#issuecomment-246276723
+  rm txaio/test/test_packaging.py
+}
+
+build() {
+  cd "$srcdir"/txaio
+  python -m build --wheel --no-isolation
+}
+
+# PPC hack: check fails, don't care enough to try to fix it.
+#check() {
+#  cd "$srcdir"/txaio
+#  python -m pytest
+#}
+
+package() {
+  cd txaio
+  python -m installer --destdir="$pkgdir" dist/*.whl
+  install -Dm644 LICENSE "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
+}
