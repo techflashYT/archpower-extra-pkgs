@@ -1,0 +1,4 @@
+[python-wsaccel]
+source = "git"
+git = "https://github.com/methane/wsaccel.git"
+prefix = "v"

@@ -1,0 +1,18 @@
+pkgbase = python-wsaccel
+	pkgdesc = Accelerator for ws4py and AutobahnPython
+	pkgver = 0.6.6
+	pkgrel = 2
+	url = https://github.com/methane/wsaccel
+	arch = x86_64
+	license = Apache
+	checkdepends = python-pytest
+	makedepends = python-setuptools
+	makedepends = cython
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-wheel
+	depends = python
+	source = https://github.com/methane/wsaccel/archive/v0.6.6/python-wsaccel-0.6.6.tar.gz
+	sha512sums = 4a107db921f6f6549fb9f2f0b5c698331274171ef509136fc2d83cb6ca8bedbde32a14aaca4e38e16af3054337774dbd6aa7d8caee7866a51ded751d7d3764be
+
+pkgname = python-wsaccel
