@@ -1,0 +1,15 @@
+--- a/src/common/printer.c	2024-08-18 14:12:27.000000000 +0000
++++ b/src/common/printer.c	2024-10-24 17:54:22.185043518 +0000
+@@ -707,7 +707,11 @@
+ 
+   char* l1i = get_str_l1i(cpu->cach);
+   char* l1d = get_str_l1d(cpu->cach);
+-  char* l2 = get_str_l2(cpu->cach);
++ 
++  char* l2 = "0KB";
++  if (cpu->cach->L2->exists) {
++    l2 = get_str_l2(cpu->cach);
++  }
+   char* l3 = get_str_l3(cpu->cach);
+   char* pp = get_str_peak_performance(cpu->peak_performance);
+ 
