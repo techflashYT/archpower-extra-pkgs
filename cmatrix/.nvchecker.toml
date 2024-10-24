@@ -1,0 +1,4 @@
+[cmatrix]
+source = "git"
+git = "https://github.com/abishekvashok/cmatrix.git"
+prefix = "v"
