@@ -1,0 +1,4 @@
+[xdotool]
+source = "git"
+git = "https://github.com/jordansissel/xdotool.git"
+prefix = "v"

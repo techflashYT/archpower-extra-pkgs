@@ -1,0 +1,26 @@
+# Maintainer: Evangelos Foutras <foutrelis@archlinux.org>
+# Contributor: Rttommy <rttommy@gmail.com>
+
+pkgname=xdotool
+pkgver=3.20211022.1
+pkgrel=2
+pkgdesc="Command-line X11 automation tool"
+arch=('x86_64' 'powerpc')
+url="https://www.semicomplete.com/projects/xdotool/"
+license=('BSD')
+depends=('libxtst' 'libxinerama' 'libxkbcommon')
+source=(https://github.com/jordansissel/xdotool/releases/download/v$pkgver/$pkgname-$pkgver.tar.gz)
+sha256sums=('96f0facfde6d78eacad35b91b0f46fecd0b35e474c03e00e30da3fdd345f9ada')
+
+build() {
+  cd $pkgname-$pkgver
+  make WITHOUT_RPATH_FIX=1
+}
+
+package() {
+  cd $pkgname-$pkgver
+  make PREFIX="$pkgdir/usr" INSTALLMAN="$pkgdir/usr/share/man" install
+  install -Dm644 COPYRIGHT -t "$pkgdir/usr/share/licenses/$pkgname"
+}
+
+# vim:set ts=2 sw=2 et:
