@@ -16,4 +16,4 @@ To use my repo, simply add the following to your pacman.conf
 Server = https://repo.wii-linux.org/arch/extra/
 ```
 
-You'll also need to download and install the keyring, which can be obtained from [here](https://repo.wii-linux.org/arch/wiilinux/wii-linux-toolchain-1.0.0-1-x86_64.pkg.tar.zst).
+You'll also need to download and install the keyring, which can be obtained from [here](https://repo.wii-linux.org/arch/wiilinux/wii-linux-keyring-1.0-2-any.pkg.tar.zst).
