@@ -1,0 +1,43 @@
+# Maintainer: Sergej Pupykin <pupykin.s+arch@gmail.com>
+# Contributor: Stefano Zamprogno <stefano dot zamprogno at gmail dot com>
+# Contributor: Chuck Yang <Chuck.Yang@gmail.com>
+
+pkgname=lshw
+pkgver=B.02.20
+_commit=4c6497c8b0a67cd9fa9693e9101a7cafd3297e81
+pkgrel=1
+pkgdesc="A small tool to provide detailed information on the hardware configuration of the machine."
+url="https://ezix.org/project/wiki/HardwareLiSter"
+license=('GPL')
+arch=('x86_64' 'powerpc')
+depends=('gcc-libs' 'hwdata')
+optdepends=('gtk3')
+makedepends=('gcc' 'gtk2-compat' 'sqlite' 'git')
+#source=(https://ezix.org/software/files/lshw-$pkgver.tar.gz
+#        82393aa9b59307a443677df7340a1dd38847a5ef.patch)
+source=("$pkgname-$pkgver::git+https://ezix.org/src/pkg/lshw.git#commit=${_commit}")
+sha256sums=('SKIP')
+
+prepare() {
+  cd "$srcdir"/$pkgname-$pkgver
+  sed -i 's|/usr/bin/gtk-lshw|/usr/sbin/gtk-lshw|' src/gui/integration/gtk-lshw.desktop
+#  sed -i '/^LDFLAGS=$/d' src/core/Makefile src/gui/Makefile
+#  patch -p1 <../82393aa9b59307a443677df7340a1dd38847a5ef.patch
+}
+
+build() {
+  cd "$srcdir"/$pkgname-$pkgver
+  export VERSION=$pkgver
+  make SBINDIR=/usr/bin
+  make SBINDIR=/usr/bin gui
+}
+
+package() {
+  cd "$srcdir"/$pkgname-$pkgver
+  make DESTDIR="$pkgdir"/ SBINDIR=/usr/bin install
+  make DESTDIR="$pkgdir"/ SBINDIR=/usr/bin install-gui
+  install -Dm0644 src/gui/integration/gtk-lshw.desktop "$pkgdir"/usr/share/applications/gtk-lshw.desktop
+  install -Dm0644 src/gui/integration/gtk-lshw.pam "$pkgdir"/usr/share/doc/$pkgname/gtk-lshw.pam
+  install -Dm0644 src/gui/integration/console.apps "$pkgdir"/usr/share/doc/$pkgname/console.apps
+  rm -f "$pkgdir"/usr/share/lshw/{pci,usb}.ids
+}

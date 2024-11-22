@@ -1,0 +1,18 @@
+pkgbase = lshw
+	pkgdesc = A small tool to provide detailed information on the hardware configuration of the machine.
+	pkgver = B.02.20
+	pkgrel = 1
+	url = https://ezix.org/project/wiki/HardwareLiSter
+	arch = x86_64
+	license = GPL
+	makedepends = gcc
+	makedepends = gtk2-compat
+	makedepends = sqlite
+	makedepends = git
+	depends = gcc-libs
+	depends = hwdata
+	optdepends = gtk3
+	source = lshw-B.02.20::git+https://ezix.org/src/pkg/lshw.git#commit=4c6497c8b0a67cd9fa9693e9101a7cafd3297e81
+	sha256sums = SKIP
+
+pkgname = lshw
