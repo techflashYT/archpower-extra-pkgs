@@ -1,0 +1,4 @@
+[python-pyusb]
+source = "git"
+git = "https://github.com/pyusb/pyusb.git"
+prefix = "v"
