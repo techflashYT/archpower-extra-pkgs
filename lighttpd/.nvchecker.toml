@@ -1,0 +1,4 @@
+[lighttpd]
+source = "git"
+git = "https://github.com/lighttpd/lighttpd1.4.git"
+prefix = "lighttpd-"

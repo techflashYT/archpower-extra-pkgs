@@ -1,0 +1,94 @@
+# Maintainer: Pierre Schmitz <pierre@archlinux.de>
+
+pkgname=lighttpd
+pkgver=1.4.76
+pkgrel=1
+pkgdesc='A secure, fast, compliant and very flexible web-server'
+license=('BSD-3-Clause')
+arch=('x86_64' 'powerpc')
+url="https://www.lighttpd.net/"
+depends=(
+	'pcre2'
+)
+makedepends=(
+	'brotli'
+	'git'
+	'krb5'
+	'libdbi'
+	'libldap'
+	'libmaxminddb'
+	'libxml2'
+	'lua'
+	'mariadb-libs'
+	'meson'
+	'sqlite'
+)
+optdepends=(
+	'brotli: mod_deflate'
+	'krb5: mod_authn_gssapi'
+	'libdbi: mod_authn_dbi/mod_vhostdb_dbi'
+	'libldap: mod_authn_ldap/mod_vhostdb_ldap'
+	'libmaxminddb: mod_maxminddb'
+	'libxml2: mod_webdav'
+	'lua: mod_magnet'
+	'mariadb-libs: mod_authn_mysql/mod_vhostdb_mysql'
+	'sqlite: mod_webdav'
+)
+backup=(
+	'etc/lighttpd/lighttpd.conf'
+	'etc/logrotate.d/lighttpd'
+)
+options=('emptydirs')
+source=(
+	"git+https://github.com/lighttpd/lighttpd1.4.git#tag=lighttpd-${pkgver}?signed"
+	'lighttpd.logrotate.d'
+	'lighttpd.conf'
+	'lighttpd.tmpfiles'
+)
+sha256sums=('19a15e49267a2d0ec1d4c6a9d5d28828690e15a8ad7ed6c5de654e2a2ba502f7'
+            '41f6c0042bb61021553779f861910e335834f6c15e4411756cdc6233b31076fe'
+            '3aaa31c3d200e5346e9b8bb0eec293c2b7582598f3baf46537f05b46d6d4becd'
+            'da6878d1649572259f29ae50236a129ff131c9b1730af81498581824cf8c4c35')
+validpgpkeys=('C7CA1E9E29DC77F5480894B2E0E7D0171E95BAD7'
+              '649D0DD767FF206202A76C5158F14A786FE198C8'
+              'EAAF41A8BE3BB8D001CACD136DE62CA242909B84')
+
+build() {
+	arch-meson ${pkgname}1.4 build \
+	  -D with_xattr=true \
+	  -D with_brotli=enabled \
+	  -D with_dbi=enabled \
+	  -D with_krb5=enabled \
+	  -D with_ldap=enabled \
+	  -D with_lua=true \
+	  -D with_maxminddb=enabled \
+	  -D with_mysql=enabled \
+	  -D with_openssl=true \
+	  -D with_pcre2=true \
+	  -D with_webdav_props=enabled \
+	  -D with_webdav_locks=enabled
+
+		# sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+	# make
+	meson compile -C build
+}
+
+check() {
+	meson test -C build --print-errorlogs
+}
+
+package() {
+	meson install -C build --destdir "${pkgdir}"
+
+	install -D -m644 lighttpd.logrotate.d "${pkgdir}"/etc/logrotate.d/lighttpd
+	install -D -m644 lighttpd.conf "${pkgdir}"/etc/lighttpd/lighttpd.conf
+	install -d -m700 -o 33 -g 33 "${pkgdir}"/var/{log,cache}/lighttpd/
+	install -D -m644 lighttpd.tmpfiles "${pkgdir}"/usr/lib/tmpfiles.d/lighttpd.conf
+	install -D -m644 -t "${pkgdir}"/usr/lib/systemd/system/ ${pkgname}1.4/doc/systemd/lighttpd.{service,socket}
+
+	pushd ${pkgname}1.4/doc/config >/dev/null
+	find . -type f ! -name 'Makefile*' -exec install -D -m644 {} "${pkgdir}"/usr/share/doc/lighttpd/config/{} \;
+	popd >/dev/null
+
+	install -D -m644 ${pkgname}1.4/COPYING "${pkgdir}"/usr/share/licenses/${pkgname}/COPYING
+}
