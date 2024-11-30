@@ -1,0 +1,5 @@
+[wlroots]
+source = "gitlab"
+host = "gitlab.freedesktop.org"
+gitlab = "wlroots/wlroots"
+use_max_tag = true
