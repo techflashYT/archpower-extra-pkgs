@@ -1,0 +1,19 @@
+pkgbase = waylandpp
+	pkgdesc = Wayland C++ bindings
+	pkgver = 1.0.0
+	pkgrel = 3
+	url = https://github.com/NilsBrause/waylandpp
+	arch = x86_64
+	license = MIT
+	license = GPL3
+	makedepends = cmake
+	makedepends = egl-wayland
+	depends = wayland
+	depends = pugixml
+	conflicts = waylandpp-git
+	source = https://github.com/NilsBrause/waylandpp/archive/1.0.0.zip
+	source = waylandpp-gcc13.patch::https://patch-diff.githubusercontent.com/raw/NilsBrause/waylandpp/pull/75.patch
+	sha512sums = 9110fb147a01bc43e54f239a694d4ed42264b86d1f51f3f6afd1d0b30e893ec2b524bf7e77295fafdcbf7fcac22af01bde7168be69865e354b081698fdf5dcc6
+	sha512sums = 8a3429919eb6846166b77319f39ae33405a6fb0213af0eac9e21c65f588d5085c8dd1ee6976844254368ea0c50b51dfd1c9dadd186c4570e0d417cb1e622052c
+
+pkgname = waylandpp

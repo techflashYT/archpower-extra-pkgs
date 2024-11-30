@@ -1,0 +1,3 @@
+[waylandpp]
+source = "git"
+git = "https://github.com/NilsBrause/waylandpp.git"
