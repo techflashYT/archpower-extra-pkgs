@@ -2,7 +2,7 @@
 # Contributor: Ondrej Martinak <omartinak@gmail.com>
 
 pkgname=sfml
-pkgver=2.6.1
+pkgver=2.6.2
 pkgrel=1
 pkgdesc='A simple, fast, cross-platform, and object-oriented multimedia API'
 arch=('x86_64' 'powerpc')
@@ -13,7 +13,7 @@ makedepends=('mesa' 'cmake' 'doxygen' 'systemd' 'ninja')
 provides=('libsfml-window.so' 'libsfml-network.so' 'libsfml-system.so'
           'libsfml-audio.so' 'libsfml-graphics.so')
 source=(${pkgname}-${pkgver}.tar.gz::https://github.com/SFML/SFML/archive/${pkgver}.tar.gz)
-sha512sums=('b376d3b00277ed60d107fe1268c210749b3aafcee618a8f924b181a9b476e92b9cb9baddecf70a8913b5910c471d53ea0260a876ad7b2db2b98b944d9f508714')
+sha512sums=('d8a8bee3aa9acda4609104c2a9d4a2512e4be6d6e85fd4b24c287c03f60cfb888e669e61bfac4113dae35f0c3492559b65b3453baf38766d8c0223d9ab77aada')
 
 build() {
   cmake -B build -S SFML-${pkgver} -G Ninja \
