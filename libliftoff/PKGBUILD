@@ -1,0 +1,45 @@
+# Maintainer: Maxime Gauduin <alucryd@archlinux.org>
+# Maintainer: Giancarlo Razzolini <grazzolini@archlinux.org>
+# Contributor: Sefa Eyeoglu <contact@scrumplex.net>
+
+pkgname=libliftoff
+pkgver=0.5.0
+pkgrel=1
+pkgdesc='Lightweight KMS plane library'
+arch=(x86_64 powerpc)
+url=https://gitlab.freedesktop.org/emersion/libliftoff
+license=(MIT)
+depends=(
+  glibc
+  libdrm
+)
+makedepends=(
+  git
+  meson
+)
+provides=(libliftoff.so)
+_tag=8b08dc1c14fd019cc90ddabe34ad16596b0691f4
+source=(git+https://gitlab.freedesktop.org/emersion/libliftoff.git#tag=${_tag})
+b2sums=('6733d1a1f01fa27c1d862a644ba56468b67d60375845c9134ab47d1edb1537cc3003e6689b09f3ee8613592e59f50adaff6eefac61892c3772e9a4f64de2858f')
+
+pkgver() {
+  cd libliftoff
+  git describe --tags | sed 's/^v//; s/-/.r/; s/-g/./'
+}
+
+build() {
+  arch-meson libliftoff build
+  meson compile -C build
+}
+
+check() {
+  meson test -C build
+}
+
+package() {
+  DESTDIR="${pkgdir}" meson install -C build
+  install -Dm 644 libliftoff/LICENSE -t "${pkgdir}"/usr/share/licenses/libliftoff/
+  install -Dm 644 libliftoff/README.md -t "${pkgdir}"/usr/share/doc/libliftoff/
+}
+
+# vim: ts=2 sw=2 et:

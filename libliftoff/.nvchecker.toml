@@ -1,0 +1,4 @@
+[libliftoff]
+source = "git"
+git = "https://gitlab.freedesktop.org/emersion/libliftoff.git"
+prefix = "v"
