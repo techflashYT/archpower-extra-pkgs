@@ -1,4 +1,0 @@
-[hexedit]
-source = "github"
-github = "pixel/hexedit"
-use_max_tag = true

@@ -1,4 +1,0 @@
-[dillo]
-source = "git"
-git = "https://github.com/dillo-browser/dillo.git"
-prefix = "v"

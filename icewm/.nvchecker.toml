@@ -1,4 +1,0 @@
-[icewm]
-source = "github"
-github = "ice-wm/icewm"
-use_max_tag = true
