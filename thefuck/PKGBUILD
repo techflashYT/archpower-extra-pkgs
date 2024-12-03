@@ -1,0 +1,65 @@
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+
+pkgname=thefuck
+pkgver=3.32
+pkgrel=11
+pkgdesc="Magnificent app which corrects your previous console command"
+arch=('any')
+url="https://github.com/nvbn/thefuck"
+license=('MIT')
+depends=('python' 'python-colorama' 'python-decorator' 'python-psutil' 'python-pyte'
+'python-six')
+makedepends=('python-build' 'python-installer' 'python-setuptools' 'python-wheel')
+#checkdepends=('python-pytest-mock' 'python-pexpect' 'go' 'python-pytest')
+source=(
+  "https://github.com/nvbn/thefuck/archive/$pkgver/$pkgname-$pkgver.tar.gz"
+  $pkgname-3.32-remove_mock.patch
+  $pkgname-3.32-remove_imp.patch
+  https://github.com/nvbn/thefuck/commit/dd26fb91a0fdec42fc1990bb91eab21e2c44a0a8.patch
+  https://github.com/nvbn/thefuck/commit/59500dd5ba08fd4dbefe43f0300336f5c69e37fb.patch
+)
+sha512sums=('961b9b6dc374cc0b854698455f688cf110adb21cfebd4cb645eb5f1ce11c14de6699bb4d40de86a5f9461273cbfc2eea318a9d437f803dc578dd431966cf26c1'
+            'f3dcbfae6a8061d44dd47196ff00e4d5ae065e938ce4c3cf009f107f195e0ea3bcbac2bfb9a2e86ad471c14c9b8991e61490884631291aee41d6a5ad257a4d0a'
+            '0adbde0af4ddbeb9f109da7ba7fe616c04ce1a5ed9f78f7eb14b6f0e6aa68da6d615794907e2ac88c5f162a9cabd9218bc2dc7e2cdf91558363d546507b21d68'
+            '63dfa603f674e94e795fe5771c9fcd3314a74724e7368fb787059ae7a5af4e89fa7b44b67e287fb95e8c6798fe1ae49a0c4bcf0ec9741a51aecf3b9387e7ac67'
+            'df570dd885f8e9599fe586342bcdc1c56426349c93430593d7bf15edbafe731ae0dd3d40c4f451ac2ea933e18e39d538979ab230b469d3b949b7c95bc6f47e45')
+
+prepare() {
+  # remove the use of python-mock: https://github.com/nvbn/thefuck/pull/1437
+  patch -Np1 -d $pkgname-$pkgver -i ../$pkgname-3.32-remove_mock.patch
+  # remove the use of imp module: https://github.com/nvbn/thefuck/pull/1248
+  patch -Np1 -d $pkgname-$pkgver -i ../$pkgname-3.32-remove_imp.patch
+  # remove the use of distutils module: https://github.com/nvbn/thefuck/pull/1404
+  patch -Np1 -d $pkgname-$pkgver -i ../dd26fb91a0fdec42fc1990bb91eab21e2c44a0a8.patch
+  # pytest v8.x compatibility: https://github.com/nvbn/thefuck/pull/1474
+  patch -Np1 -d $pkgname-$pkgver -i ../59500dd5ba08fd4dbefe43f0300336f5c69e37fb.patch
+}
+
+build() {
+  cd thefuck-$pkgver
+  python -m build --wheel --no-isolation
+}
+
+#check() {
+#  cd thefuck-$pkgver
+
+  # Hack distribution test by installing it and set PYTHONPATH afterwards
+#  python -m installer --destdir="$PWD/tmp_install" dist/*.whl
+
+  # Hack $HOME as it's / in the chroot and not writable
+#  cp tests/test_conf.py "$srcdir/test_conf.py.bak"
+#  sed -i "s|data = {}|data = {'HOME': '$srcdir'}|" tests/test_conf.py
+#  local site_packages=$(python -c "import site; print(site.getsitepackages()[0])")
+#  LC_CTYPE=en_US.utf8 PYTHONPATH="$PWD/tmp_install/$site_packages:$PYTHONPATH" \
+#    pytest tests
+#  mv "$srcdir/test_conf.py.bak" tests/test_conf.py
+#}
+
+package() {
+  cd thefuck-$pkgver
+  python -m installer --destdir="$pkgdir" dist/*.whl
+
+  install -Dm644 LICENSE.md "$pkgdir"/usr/share/licenses/$pkgname/LICENSE.md
+}
+
+# vim:set ts=2 sw=2 et:

@@ -1,0 +1,3 @@
+[thefuck]
+source = "git"
+git = "https://github.com/nvbn/thefuck.git"
