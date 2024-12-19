@@ -1,7 +1,7 @@
 pkgbase = python-wsaccel
 	pkgdesc = Accelerator for ws4py and AutobahnPython
 	pkgver = 0.6.6
-	pkgrel = 2
+	pkgrel = 3
 	url = https://github.com/methane/wsaccel
 	arch = x86_64
 	license = Apache
