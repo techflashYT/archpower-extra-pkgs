@@ -4,7 +4,7 @@
 # Contributor: Omar Pakker
 
 pkgname=wlroots
-pkgver=0.18.1
+pkgver=0.18.2
 pkgrel=1
 license=('MIT')
 pkgdesc='Modular Wayland compositor library'
@@ -47,21 +47,14 @@ provides=(
 source=(
     "$pkgname-$pkgver.tar.gz::https://gitlab.freedesktop.org/wlroots/wlroots/-/releases/$pkgver/downloads/wlroots-$pkgver.tar.gz"
     "https://gitlab.freedesktop.org/wlroots/wlroots/-/releases/$pkgver/downloads/wlroots-$pkgver.tar.gz.sig"
-    "./workaround-old-meson-version.patch"
 )
-sha256sums=('b9c4bfef4123fe9f8662280b851e3c5741927457174315826827bfbb70612878'
-            'SKIP'
-            '18fb376dbe8227ff71000a3f02d8fddc2e38258b2da6e7ad4279b3485607a8cc')
+sha256sums=('cf776c169169f279808d9eabc6583f484338dcd454c966a285ff178c88c105d4'
+            'SKIP')
 validpgpkeys=(
     '34FF9526CFEF0E97A340E2E40FDE7BE0E88F5E48' # Simon Ser
     '9DDA3B9FA5D58DD5392C78E652CB6609B22DA89A' # Drew DeVault
     '4100929B33EEB0FD1DB852797BC79407090047CA' # Sway signing key
 )
-
-prepare() {
-    cd "${srcdir}/$pkgname-$pkgver"
-    patch -Np1 < ../workaround-old-meson-version.patch
-}
 
 build() {
     arch-meson "$pkgname-$pkgver" build
