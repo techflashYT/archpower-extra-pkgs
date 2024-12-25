@@ -1,0 +1,4 @@
+[doomretro]
+source = "git"
+git = "https://github.com/bradharding/doomretro.git"
+prefix = "v"
