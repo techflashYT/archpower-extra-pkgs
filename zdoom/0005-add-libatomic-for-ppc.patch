@@ -1,0 +1,11 @@
+--- a/src/CMakeLists.txt	2024-12-25 06:47:38.385349557 +0000
++++ b/src/CMakeLists.txt	2024-12-25 07:37:48.914427769 +0000
+@@ -1182,7 +1182,7 @@
+ 	set( ZDOOM_LIBS ${ZDOOM_LIBS} nsl socket)
+ endif(${CMAKE_SYSTEM_NAME} STREQUAL "SunOS")
+ 
+-target_link_libraries( zdoom ${ZDOOM_LIBS} gdtoa dumb lzma )
++target_link_libraries( zdoom ${ZDOOM_LIBS} gdtoa dumb lzma atomic )
+ include_directories( .
+ 	g_doom
+ 	g_heretic

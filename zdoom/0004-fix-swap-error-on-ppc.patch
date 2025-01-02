@@ -1,0 +1,15 @@
+--- a/src/m_swap.h	2016-02-22 02:11:13.000000000 +0000
++++ b/src/m_swap.h	2024-12-25 03:10:56.439555173 +0000
+@@ -81,10 +81,10 @@
+ 
+ // Swap 16bit, that is, MSB and LSB byte.
+ // No masking with 0xFF should be necessary. 
+-inline short LittleShort (short x)
++/*inline short LittleShort (short x)
+ {
+ 	return (short)((((unsigned short)x)>>8) | (((unsigned short)x)<<8));
+-}
++}*/
+ 
+ inline unsigned short LittleShort (unsigned short x)
+ {
