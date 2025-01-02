@@ -1,0 +1,46 @@
+# Maintainer: Levente Polyak <anthraxx[at]archlinux[dot]org>
+# Contributor: Timothy Redaelli <timothy.redaelli@gmail.com>
+# Contributor: Jim Ferguson <ferguson@ncsa.uiuc.edu>
+# Contributor: Xi0N <jonandermonleon@gmail.com>
+# Contributor: goll <adrian.goll+aur[at]gmail>
+
+pkgname=iperf3
+pkgver=3.17.1
+pkgrel=1
+pkgdesc='TCP, UDP, and SCTP network bandwidth measurement tool'
+url='https://github.com/esnet/iperf'
+arch=(x86_64 powerpc)
+license=(BSD-3-Clause)
+depends=(
+  glibc
+  openssl
+  lksctp-tools
+)
+provides=(
+  libiperf.so
+)
+source=("${url}/archive/refs/tags/${pkgver}/${pkgname}-${pkgver}.tar.gz")
+sha512sums=('54789c5a63081aa803575ce1df3cb251a3b0bb16313f049f2479ae3a5af39944ace1222d4a086bed0ab34821da73371b2499f8b8283791a953d861da4cfc56f0')
+b2sums=('5b353001feb6481ace714121004ca4e5299276ed29dd47ea3f8f0fcce847249bb5f40dcf68cf6f8c83e0a6ceff31151ca47e8343bf055c1f94d2fbe182502d6a')
+
+build() {
+  cd iperf-${pkgver}
+  ./configure --prefix=/usr
+  make
+}
+
+check() {
+  cd iperf-${pkgver}
+  make check
+}
+
+package() {
+  cd iperf-${pkgver}
+  make DESTDIR="${pkgdir}" install
+  install -Dm 644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
+  install -Dm 644 README.md -t "${pkgdir}/usr/share/doc/${pkgname}"
+  install -Dm 644 examples/*{.am,.in,.c} -t "${pkgdir}/usr/share/doc/${pkgname}/examples"
+  install -Dm 644 contrib/iperf3.service -t "${pkgdir}/usr/lib/systemd/system"
+}
+
+# vim: ts=2 sw=2 et:
