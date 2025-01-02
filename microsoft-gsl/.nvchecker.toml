@@ -1,4 +1,0 @@
-[microsoft-gsl]
-source = "git"
-git = "https://github.com/Microsoft/GSL.git"
-prefix = "v"
