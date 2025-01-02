@@ -2,27 +2,32 @@
 # Contributor: Ondrej Martinak <omartinak@gmail.com>
 
 pkgname=sfml
-pkgver=2.6.2
+pkgver=3.0.0
 pkgrel=1
 pkgdesc='A simple, fast, cross-platform, and object-oriented multimedia API'
 arch=('x86_64' 'powerpc')
 url='http://www.sfml-dev.org/'
-license=('zlib')
-depends=('libsndfile' 'libxrandr' 'openal' 'glew' 'freetype2' 'libx11' 'libxcursor')
+license=('Zlib')
+depends=('libsndfile' 'libxrandr' 'glew' 'freetype2' 'libx11' 'libxcursor' 'libxi')
 makedepends=('mesa' 'cmake' 'doxygen' 'systemd' 'ninja')
 provides=('libsfml-window.so' 'libsfml-network.so' 'libsfml-system.so'
           'libsfml-audio.so' 'libsfml-graphics.so')
 source=(${pkgname}-${pkgver}.tar.gz::https://github.com/SFML/SFML/archive/${pkgver}.tar.gz)
-sha512sums=('d8a8bee3aa9acda4609104c2a9d4a2512e4be6d6e85fd4b24c287c03f60cfb888e669e61bfac4113dae35f0c3492559b65b3453baf38766d8c0223d9ab77aada')
+sha512sums=('116b934950b02639aa0924cdf6ceaf34518be7f94037e77e52f374aa0a03403487ef58384137569d930961c7d65291a7f0bbddcf1eaf4260086f49afbfae1f27')
 
 build() {
-  cmake -B build -S SFML-${pkgver} -G Ninja \
-      -DCMAKE_INSTALL_PREFIX=/usr \
-      -DSFML_USE_SYSTEM_DEPS=ON \
-      -DSFML_BUILD_EXAMPLES=1 \
-      -DSFML_BUILD_DOC=1 \
-      -DSFML_INSTALL_PKGCONFIG_FILES=1 \
-      -DSFML_PKGCONFIG_INSTALL_PREFIX=/usr/share/pkgconfig
+  export CXXFLAGS+=" -ffat-lto-objects"
+
+  cmake \
+    -B build \
+    -S SFML-${pkgver} \
+    -G Ninja \
+    -DBUILD_SHARED_LIBS=ON \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DSFML_USE_SYSTEM_DEPS=ON \
+    -DSFML_BUILD_EXAMPLES=ON \
+    -DSFML_BUILD_DOC=ON \
+    -DSFML_INSTALL_PKGCONFIG_FILES=ON
   ninja -C build
   ninja -C build doc
 }
