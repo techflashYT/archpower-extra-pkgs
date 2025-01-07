@@ -1,0 +1,14 @@
+pkgbase = evtest
+	pkgdesc = Input device event monitor and query tool
+	pkgver = 1.35
+	pkgrel = 2
+	url = https://cgit.freedesktop.org/evtest/
+	arch = x86_64
+	license = GPL
+	makedepends = asciidoc
+	makedepends = xmlto
+	depends = glibc
+	source = https://gitlab.freedesktop.org/libevdev/evtest/-/archive/evtest-1.35/evtest-evtest-1.35.tar.gz
+	sha256sums = 06dfe6b9760b78f3f73aca2120cbcb79339b33e59d5c79a49b4bd5d34844b054
+
+pkgname = evtest

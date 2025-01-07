@@ -1,0 +1,4 @@
+[evtest]
+source = "git"
+git = "https://gitlab.freedesktop.org/libevdev/evtest.git"
+prefix = "evtest-"
