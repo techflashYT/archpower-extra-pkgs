@@ -2,7 +2,7 @@
 
 pkgname=cuberite
 _pkgver=1.12.2
-_commit=928fddc20e5da7a9a0ae8f7fbf3e5ba28f3a0463
+_commit=eda440e
 pkgver="${_pkgver}c2_${_commit}"
 pkgrel=2
 _mng_ver=1.0.4
@@ -17,7 +17,7 @@ optdepends=("tar: needed in order to create world backups"
 provides=("minecraft-server=${_pkgver%_*}" "spigot=${_pkgver%_*}")
 backup=('etc/conf.d/cuberite')
 install="${pkgname}.install"
-source=("git+https://github.com/ashquarky/cuberite#commit=${_commit}"
+source=("git+https://github.com/cuberite/cuberite#commit=${_commit}"
 	"git+https://github.com/cuberite/Core"
 	"git+https://github.com/cuberite/ProtectionAreas"
 	"git+https://github.com/cuberite/ChatLog"
@@ -133,4 +133,3 @@ package() {
 	# Give the group write permissions and set user or group ID on execution
 	chmod g+s "${pkgdir}${_server_root}"
 }
-
