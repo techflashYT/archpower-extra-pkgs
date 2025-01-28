@@ -1,6 +1,6 @@
 pkgbase = lighttpd
 	pkgdesc = A secure, fast, compliant and very flexible web-server
-	pkgver = 1.4.76
+	pkgver = 1.4.77
 	pkgrel = 1
 	url = https://www.lighttpd.net/
 	arch = x86_64
@@ -29,14 +29,14 @@ pkgbase = lighttpd
 	options = emptydirs
 	backup = etc/lighttpd/lighttpd.conf
 	backup = etc/logrotate.d/lighttpd
-	source = git+https://github.com/lighttpd/lighttpd1.4.git#tag=lighttpd-1.4.76?signed
+	source = git+https://github.com/lighttpd/lighttpd1.4.git#tag=lighttpd-1.4.77?signed
 	source = lighttpd.logrotate.d
 	source = lighttpd.conf
 	source = lighttpd.tmpfiles
 	validpgpkeys = C7CA1E9E29DC77F5480894B2E0E7D0171E95BAD7
 	validpgpkeys = 649D0DD767FF206202A76C5158F14A786FE198C8
 	validpgpkeys = EAAF41A8BE3BB8D001CACD136DE62CA242909B84
-	sha256sums = 19a15e49267a2d0ec1d4c6a9d5d28828690e15a8ad7ed6c5de654e2a2ba502f7
+	sha256sums = 93f43956daed12e40ead0ea6a76e55d034c298555f25f1d3a2310f437a3c65ba
 	sha256sums = 41f6c0042bb61021553779f861910e335834f6c15e4411756cdc6233b31076fe
 	sha256sums = 3aaa31c3d200e5346e9b8bb0eec293c2b7582598f3baf46537f05b46d6d4becd
 	sha256sums = da6878d1649572259f29ae50236a129ff131c9b1730af81498581824cf8c4c35
