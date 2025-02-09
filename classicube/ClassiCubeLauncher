@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -eu
+
+[ -z "${XDG_DATA_HOME}" ] && _xdg_data="${HOME}/.local/share" || _xdg_data="${XDG_DATA_HOME}"
+mkdir -p "${_xdg_data}/ClassiCube"
+cd "${_xdg_data}/ClassiCube"
+
+exec ClassiCube "$@"
