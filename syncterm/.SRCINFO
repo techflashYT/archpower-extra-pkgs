@@ -1,0 +1,18 @@
+pkgbase = syncterm
+	pkgdesc = A BBS terminal program, supporting ANSI music and IBM charset.
+	pkgver = 1.3
+	pkgrel = 1
+	url = http://syncterm.bbsdev.net
+	arch = i686
+	arch = x86_64
+	license = GPL
+	makedepends = unzip
+	depends = ncurses
+	optdepends = hicolor-icon-theme: for GUI icon support
+	optdepends = sdl2: for SDL GUI support
+	optdepends = libx11: for X11 GUI support
+	options = !debug
+	source = https://downloads.sourceforge.net/project/syncterm/syncterm/syncterm-1.3/syncterm-1.3-src.tgz
+	md5sums = 3001675fb0a4feed52f7b9ac63947c40
+
+pkgname = syncterm
