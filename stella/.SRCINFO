@@ -1,0 +1,14 @@
+pkgbase = stella
+	pkgdesc = Atari 2600 VCS emulator
+	pkgver = 7.0
+	pkgrel = 1
+	url = https://stella-emu.github.io/
+	arch = x86_64
+	license = GPL2
+	makedepends = glu
+	depends = sdl2
+	depends = gtk-update-icon-cache
+	source = https://github.com/stella-emu/stella/releases/download/7.0/stella-7.0-src.tar.xz
+	sha256sums = d3fdd7a4eca4831f41b9f4ca39589502d01c612aee010395c27a088029adc0bc
+
+pkgname = stella
