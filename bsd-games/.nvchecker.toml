@@ -1,0 +1,4 @@
+[bsd-games]
+source = "git"
+git = "https://git.code.sf.net/p/bsd-games/code"
+prefix = "v"

@@ -1,0 +1,16 @@
+pkgbase = bsd-games
+	pkgdesc = Linux port of the collection of BSD command line games
+	pkgver = 3.3
+	pkgrel = 3
+	url = https://sourceforge.net/projects/bsd-games
+	arch = x86_64
+	license = BSD
+	makedepends = git
+	depends = ncurses
+	depends = systemd
+	optdepends = words: for hangman
+	source = bsd-games::git+https://git.code.sf.net/p/bsd-games/code?signed#tag=v3.3
+	validpgpkeys = F726C152F992ACEFBAE85569F384187A57EF569F
+	sha256sums = 33b17362808ad950865c06d26d423606b889c5b3cacf9f76105817c75f16f79e
+
+pkgname = bsd-games

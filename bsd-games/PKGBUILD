@@ -1,0 +1,32 @@
+# Maintainer: Laurent Carlier <lordheavym@gmail.com>
+# Maintainer: T.J. Townsend <blakkheim@archlinux.org>
+# Contributor: Alexander F Rødseth <xyproto@archlinux.org>
+# Contributor: Chris Brannon <cmbrannon79@gmail.com>
+# Contributor: Abhishek Dasgupta <abhidg@gmail.com>
+# Contributor: SmackleFunky <smacklefunky@optusnet.com.au>
+
+pkgname=bsd-games
+pkgver=3.3
+pkgrel=3
+pkgdesc='Linux port of the collection of BSD command line games'
+url='https://sourceforge.net/projects/bsd-games'
+arch=('x86_64' 'powerpc')
+license=('BSD')
+makedepends=('git')
+depends=('ncurses' 'systemd')
+optdepends=('words: for hangman')
+source=($pkgname::"git+https://git.code.sf.net/p/bsd-games/code?signed#tag=v${pkgver}")
+sha256sums=('33b17362808ad950865c06d26d423606b889c5b3cacf9f76105817c75f16f79e')
+validpgpkeys=(F726C152F992ACEFBAE85569F384187A57EF569F) # Mike Sharov
+
+build() {
+    cd "$pkgname"
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    cd "$pkgname"
+    make DESTDIR="$pkgdir" install
+    install -D -m644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
