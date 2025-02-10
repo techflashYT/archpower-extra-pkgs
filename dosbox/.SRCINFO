@@ -1,0 +1,24 @@
+pkgbase = dosbox
+	pkgdesc = Emulator with builtin DOS for running DOS Games
+	pkgver = 0.74.3
+	pkgrel = 3
+	url = http://dosbox.sourceforge.net/
+	arch = x86_64
+	license = GPL
+	makedepends = mesa-libgl
+	makedepends = gendesk
+	makedepends = patch
+	depends = sdl_net
+	depends = zlib
+	depends = sdl_sound
+	depends = libgl
+	depends = libpng
+	depends = alsa-lib
+	depends = gcc-libs
+	depends = glu
+	source = https://downloads.sourceforge.net/dosbox/dosbox-0.74-3.tar.gz
+	source = dosbox.png
+	sha256sums = c0d13dd7ed2ed363b68de615475781e891cd582e8162b5c3669137502222260a
+	sha256sums = 491c42d16fc5ef7ee2eca1b736f7801249d4ca8c0b236a001aec0d3e24504f3b
+
+pkgname = dosbox
