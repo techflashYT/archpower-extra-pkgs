@@ -1,0 +1,28 @@
+# Maintainer: Kyle Keen <keenerd@gmail.com>
+# Contributor: Sergej Pupykin <pupykin.s+arch@gmail.com>
+# Contributor: dibblethewrecker dibblethewrecker.at.jiwe.dot.org
+
+pkgname=fbgrab
+pkgver=1.5
+pkgrel=3
+pkgdesc="A framebuffer screenshot grabber"
+arch=('x86_64' 'powerpc')
+url="https://github.com/GunnarMonell/fbgrab"
+license=("GPL")
+depends=('libpng')
+source=("$pkgname-$pkgver.tgz::https://github.com/GunnarMonell/fbgrab/archive/$pkgver.tar.gz")
+sha256sums=('0202a9c4fb430eee4d8f566d09ab5f6e35c50804a192ba106046e54eb886f8f1')
+
+prepare() {
+  cd "$srcdir/$pkgname-$pkgver"
+}
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  make install DESTDIR="$pkgdir"
+}

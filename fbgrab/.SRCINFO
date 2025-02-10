@@ -1,0 +1,12 @@
+pkgbase = fbgrab
+	pkgdesc = A framebuffer screenshot grabber
+	pkgver = 1.5
+	pkgrel = 3
+	url = https://github.com/GunnarMonell/fbgrab
+	arch = x86_64
+	license = GPL
+	depends = libpng
+	source = fbgrab-1.5.tgz::https://github.com/GunnarMonell/fbgrab/archive/1.5.tar.gz
+	sha256sums = 0202a9c4fb430eee4d8f566d09ab5f6e35c50804a192ba106046e54eb886f8f1
+
+pkgname = fbgrab

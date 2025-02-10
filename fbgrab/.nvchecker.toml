@@ -1,0 +1,3 @@
+[fbgrab]
+source = "git"
+git = "https://github.com/GunnarMonell/fbgrab.git"
