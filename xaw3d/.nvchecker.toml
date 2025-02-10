@@ -1,0 +1,8 @@
+[xaw3d]
+source = "gitlab"
+gitlab = "xorg/lib/libxaw3d"
+host = "gitlab.freedesktop.org"
+use_max_tag = true
+
+include_regex = ".*libXaw3d-.*"
+prefix = "libXaw3d-"

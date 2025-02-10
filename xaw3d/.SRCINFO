@@ -1,0 +1,21 @@
+pkgbase = xaw3d
+	pkgdesc = Three-D Athena widgets
+	pkgver = 1.6.6
+	pkgrel = 1
+	url = https://gitlab.freedesktop.org/xorg/lib/libxaw3d
+	arch = x86_64
+	license = MIT
+	makedepends = xorg-util-macros
+	depends = libxmu
+	depends = libx11
+	depends = libxt
+	depends = libxext
+	depends = glibc
+	depends = xorgproto
+	source = https://xorg.freedesktop.org/archive/individual/lib/libXaw3d-1.6.6.tar.xz
+	source = https://xorg.freedesktop.org/archive/individual/lib/libXaw3d-1.6.6.tar.xz.sig
+	validpgpkeys = 4A193C06D35E7C670FA4EF0BA2FB9E081F2D130E
+	sha512sums = f324ddb1117ae6f8d50137390b2e82b638b53a6b170cce8f7bd8108fd98ce956badc7dede6b49065419f1565f9f4304571880842e799f7f48fb36bebe3dc3603
+	sha512sums = SKIP
+
+pkgname = xaw3d
