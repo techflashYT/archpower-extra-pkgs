@@ -8,6 +8,7 @@ These packages mostly target whatever the latest available code in the the Arch 
 
 These packages are specifically targetting 32-bit PPC, and are mainly for [the Wii Linux Project](https://github.com/Wii-Linux).
 They can, however, can be installed on any PowerPC machine, such as an iBook G3.  
+There's also beginning to be some effort to get packages built for 64-bit PPC, via my PowerMac G5.  Very few packages are actually done though.
 
 To use my repo, simply add the following to your pacman.conf
 
