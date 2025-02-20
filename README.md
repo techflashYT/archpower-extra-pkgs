@@ -13,8 +13,11 @@ There's also beginning to be some effort to get packages built for 64-bit PPC, v
 To use my repo, simply add the following to your pacman.conf
 
 ```
+[extra-any]
+Server = https://repo.wii-linux.org/arch/extra/any
+
 [extra]
-Server = https://repo.wii-linux.org/arch/extra/
+Server = https://repo.wii-linux.org/arch/extra/$arch
 ```
 
 You'll also need to download and install the keyring, which can be obtained from [here](https://repo.wii-linux.org/arch/wiilinux/wii-linux-keyring-1.0-2-any.pkg.tar.zst).
