@@ -5,7 +5,7 @@ pkgname=netsurf-fb
 pkgver=3.11
 pkgrel=1
 pkgdesc='Lightweight and fast web browser (framebuffer front end)'
-arch=(x86_64 i686 aarch64 powerpc)
+arch=(x86_64 i686 aarch64 powerpc powerpc64 powerpc64le)
 url=https://www.netsurf-browser.org/
 license=(MIT GPL2)
 depends=('curl' 'glibc' 'gperf' 'libdom>=0.4.2' 'libhubbub>=0.3.8' 'libjpeg' 'libnsfb' 'libnsutils>=0.1.1' 'libpng' 'libsvgtiny>=0.1.8' 'libutf8proc>=2.9.0' 'libwebp' 'openssl' 'perl-html-parser')

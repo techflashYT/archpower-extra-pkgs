@@ -5,7 +5,7 @@ pkgver=1.4.77
 pkgrel=1
 pkgdesc='A secure, fast, compliant and very flexible web-server'
 license=('BSD-3-Clause')
-arch=('x86_64' 'powerpc')
+arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le')
 url="https://www.lighttpd.net/"
 depends=(
 	'pcre2'

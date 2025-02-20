@@ -9,7 +9,7 @@ pkgrel=1
 license=('MIT')
 pkgdesc='Modular Wayland compositor library'
 url='https://gitlab.freedesktop.org/wlroots/wlroots'
-arch=('x86_64' 'powerpc')
+arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le')
 depends=(
     'libdisplay-info.so'
     'libglvnd'
