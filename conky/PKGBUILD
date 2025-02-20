@@ -14,7 +14,7 @@ license=(
   'BSD-3-Clause'
   'GPL-3.0-or-later'
 )
-arch=('x86_64' 'powerpc')
+arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le')
 makedepends=(
   'catch2'
   'cmake'

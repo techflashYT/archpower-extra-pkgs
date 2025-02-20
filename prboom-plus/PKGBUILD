@@ -8,7 +8,7 @@ pkgver=2.6.66
 pkgrel=2
 pkgdesc='An advanced, Vanilla-compatible Doom engine based on PrBoom'
 url='https://github.com/coelckers/prboom-plus'
-arch=('x86_64' 'powerpc')
+arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le')
 license=('GPL2')
 # some of these are actually not optional...
 depends=('sdl2' 'fluidsynth' 'libmad' 'portmidi' 'glu')

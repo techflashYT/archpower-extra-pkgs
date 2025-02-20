@@ -14,7 +14,7 @@ makedepends=('unzip')
 optdepends=('hicolor-icon-theme: for GUI icon support'
             'sdl2: for SDL GUI support'
             'libx11: for X11 GUI support')
-arch=('i686' 'x86_64' 'powerpc')
+arch=('i686' 'x86_64' 'powerpc' 'powerpc64' 'powerpc64le')
 source=("https://downloads.sourceforge.net/project/syncterm/syncterm/$pkgname-$pkgver/$pkgname-$pkgver-src.tgz")
 md5sums=('3001675fb0a4feed52f7b9ac63947c40')
 
