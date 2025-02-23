@@ -1,0 +1,21 @@
+pkgbase = jgmenu
+	pkgdesc = Simple, independent, contemporary-looking X11 menu, designed for scripting, ricing and tweaking
+	pkgver = 4.5.0
+	pkgrel = 1
+	url = https://www.github.com/johanmalm/jgmenu
+	arch = i686
+	arch = x86_64
+	license = GPL
+	depends = libx11
+	depends = cairo
+	depends = pango
+	depends = libxrandr
+	depends = librsvg
+	depends = libxml2
+	depends = glib2
+	depends = menu-cache
+	depends = python
+	source = jgmenu-4.5.0.tar.gz::https://www.github.com/johanmalm/jgmenu/archive/v4.5.0.tar.gz
+	sha256sums = 523d7f7a2225f4d2cc9772c44bcc661518d99ccc478bd0d099b0b157917304b1
+
+pkgname = jgmenu

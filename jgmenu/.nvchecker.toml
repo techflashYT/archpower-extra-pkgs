@@ -1,0 +1,5 @@
+[jgmenu]
+source = "github"
+github = "johanmalm/jgmenu"
+prefix = "v"
+use_max_tag = true
