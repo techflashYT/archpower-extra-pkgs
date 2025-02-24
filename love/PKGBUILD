@@ -1,0 +1,42 @@
+# Maintainer: Sven-Hendrik Haase <svenstaro@archlinux.org>
+# Contributor: Linus Sjögren <thelinx@unreliablepollution.net>
+# Contributor: Eric Forgeot < http://anamnese.online.fr >, dreeze
+# Contributor: Michael "Techflash" Garofalo <officialTechflashYT@gmail.com>
+pkgname=love
+pkgver=11.5
+pkgrel=1
+pkgdesc="An open-source 2D game engine which uses the versatile Lua scripting language to create dynamic gaming experiences"
+# no ppc64 because luajit doesn't support it :/
+arch=(x86_64 powerpc powerpc64le)
+url="http://love2d.org/"
+license=('zlib')
+depends=('luajit' 'freetype2' 'mpg123' 'openal' 'libvorbis' 'libmodplug' 'sdl2' 'shared-mime-info' 'hicolor-icon-theme' 'desktop-file-utils' 'libtheora')
+source=(
+  "https://github.com/love2d/love/releases/download/${pkgver}/love-${pkgver}-linux-src.tar.gz"
+  "./no_hashing_on_be.patch"
+)
+sha512sums=('86fe29939e0d48317e742c99c80b1805821f91539c37d1701207585593b10e3a12f335dac9c25069e0de61a7c6af7c6d5e30bc36826c29f963df8f64084a9a5b'
+            'eadd1332cd2269b516d7acff2c2671423bd9764602d57a2834442f81afef14e05d721010c28157120ce7b7878286f0d28288454a5bc87e58e4707b8c8bba5c19')
+
+prepare() {
+  cd "$srcdir"/love-$pkgver
+
+  patch -p1 < ../no_hashing_on_be.patch
+}
+
+build() {
+  cd "$srcdir"/love-$pkgver
+
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd "$srcdir"/love-$pkgver
+
+  make DESTDIR="$pkgdir" install
+
+  install -Dm0644 "license.txt" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
+
+# vim:set ts=2 sw=2 et:

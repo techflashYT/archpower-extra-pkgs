@@ -1,0 +1,117 @@
+--- a/src/modules/data/HashFunction.cpp	2023-12-03 12:50:33.000000000 +0000
++++ b/src/modules/data/HashFunction.cpp	2025-02-24 04:21:03.854048631 +0000
+@@ -21,9 +21,8 @@
+ #include "HashFunction.h"
+ 
+ // FIXME: Probably trivial by having tole and tobe functions, which can be ifdeffed to being identity functions
+-#ifdef LOVE_BIG_ENDIAN
+-#	error Hashing not yet implemented for big endian
+-#endif
++#ifndef LOVE_BIG_ENDIAN
++// just leave it to do nothing at all on BE.  We'll manually clean up any real usage
+ 
+ namespace love
+ {
+@@ -637,3 +636,4 @@
+ 
+ } // data
+ } // love
++#endif
+--- a/src/modules/data/HashFunction.h	2023-12-03 12:50:33.000000000 +0000
++++ b/src/modules/data/HashFunction.h	2025-02-24 04:23:14.171089546 +0000
+@@ -25,6 +25,8 @@
+ #include "common/StringMap.h"
+ #include "common/int.h"
+ 
++#ifndef LOVE_BIG_ENDIAN
++// make it error out on any usage on BE
+ namespace love
+ {
+ namespace data
+@@ -95,3 +97,4 @@
+ 
+ } // data
+ } // love
++#endif
+--- a/src/modules/graphics/Graphics.cpp	2023-12-03 12:50:33.000000000 +0000
++++ b/src/modules/graphics/Graphics.cpp	2025-02-24 04:15:40.020580282 +0000
+@@ -224,6 +224,7 @@
+ 	ShaderStage *s = nullptr;
+ 	std::string cachekey;
+ 
++#ifndef LOVE_BIG_ENDIAN
+ 	if (!source.empty())
+ 	{
+ 		data::HashFunction::Value hashvalue;
+@@ -238,6 +239,7 @@
+ 			s->retain();
+ 		}
+ 	}
++#endif
+ 
+ 	if (s == nullptr)
+ 	{
+--- a/src/modules/data/DataModule.h	2023-12-03 12:50:33.000000000 +0000
++++ b/src/modules/data/DataModule.h	2025-02-24 04:27:52.427541245 +0000
+@@ -87,6 +87,7 @@
+ char *encode(EncodeFormat format, const char *src, size_t srclen, size_t &dstlen, size_t linelen = 0);
+ char *decode(EncodeFormat format, const char *src, size_t srclen, size_t &dstlen);
+ 
++#ifndef LOVE_BIG_ENDIAN
+ /**
+  * Hash the input, producing an set of bytes as output.
+  *
+@@ -99,6 +100,7 @@
+ std::string hash(HashFunction::Function function, const char *input, uint64_t size);
+ void hash(HashFunction::Function function, Data *input, HashFunction::Value &output);
+ void hash(HashFunction::Function function, const char *input, uint64_t size, HashFunction::Value &output);
++#endif
+ 
+ 
+ bool getConstant(const char *in, EncodeFormat &out);
+--- a/src/modules/data/DataModule.cpp	2023-12-03 12:50:33.000000000 +0000
++++ b/src/modules/data/DataModule.cpp	2025-02-24 04:35:38.049713333 +0000
+@@ -187,6 +187,7 @@
+ 	}
+ }
+ 
++#ifndef LOVE_BIG_ENDIAN
+ std::string hash(HashFunction::Function function, Data *input)
+ {
+ 	return hash(function, (const char*) input->getData(), input->getSize());
+@@ -212,6 +213,7 @@
+ 
+ 	hashfunction->hash(function, input, size, output);
+ }
++#endif
+ 
+ DataModule::DataModule()
+ {
+--- a/src/modules/data/wrap_DataModule.cpp	2023-12-03 12:50:33.000000000 +0000
++++ b/src/modules/data/wrap_DataModule.cpp	2025-02-24 04:37:25.018231449 +0000
+@@ -300,6 +300,7 @@
+ 	return 1;
+ }
+ 
++#ifndef LOVE_BIG_ENDIAN
+ int w_hash(lua_State *L)
+ {
+ 	const char *fstr = luaL_checkstring(L, 1);
+@@ -323,6 +324,7 @@
+ 	lua_pushlstring(L, hashvalue.data, hashvalue.size);
+ 	return 1;
+ }
++#endif
+ 
+ int w_pack(lua_State *L)
+ {
+@@ -375,7 +377,9 @@
+ 	{ "decompress", w_decompress },
+ 	{ "encode", w_encode },
+ 	{ "decode", w_decode },
++#ifndef LOVE_BIG_ENDIAN
+ 	{ "hash", w_hash },
++#endif
+ 
+ 	{ "pack", w_pack },
+ 	{ "unpack", w_unpack },
