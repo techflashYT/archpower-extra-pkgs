@@ -6,9 +6,8 @@ These are chosen by hand.  If you would like to request a package to be added, p
 
 These packages mostly target whatever the latest available code in the the Arch Linux GitLab is.  
 
-These packages are specifically targetting 32-bit PPC, and are mainly for [the Wii Linux Project](https://github.com/Wii-Linux).
-They can, however, can be installed on any PowerPC machine, such as an iBook G3.  
-There's also beginning to be some effort to get packages built for 64-bit PPC, via my PowerMac G5.  Very few packages are actually done though.
+The primary target for these packages is 32-bit PowerPC, and are mainly for [the Wii Linux Project](https://github.com/Wii-Linux).
+They can, however, can be installed on any 32-bit PowerPC (`powerpc`), 64-bit PowerPC (`powerpc64`), or 64-bit POWER (`powerpc64le`) machine.  Note that not all packages are available for all architectures due to code limitations.  Some packages cannot be built for a given architecture.
 
 To use my repo, simply add the following to your pacman.conf
 
