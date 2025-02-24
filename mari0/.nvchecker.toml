@@ -1,0 +1,4 @@
+[mari0]
+source = "git"
+git = "https://github.com/Stabyourself/mari0.git"
+prefix = "v"
