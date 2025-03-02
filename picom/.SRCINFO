@@ -1,0 +1,35 @@
+pkgbase = picom
+	pkgdesc = Lightweight compositor for X11
+	pkgver = 12.5
+	pkgrel = 1
+	url = https://picom.app
+	arch = x86_64
+	license = MPL-2.0 AND MIT
+	makedepends = asciidoctor
+	makedepends = git
+	makedepends = mesa
+	makedepends = meson
+	makedepends = ninja
+	makedepends = setconf
+	makedepends = uthash
+	depends = hicolor-icon-theme
+	depends = libconfig
+	depends = libdbus
+	depends = libepoxy
+	depends = libev
+	depends = libgl
+	depends = pcre2
+	depends = pixman
+	depends = xcb-util-image
+	depends = xcb-util-renderutil
+	optdepends = dbus: for controlling picom via D-Bus
+	optdepends = python: for running picom-convgen.py
+	optdepends = rtkit: for realtime scheduling priority
+	optdepends = xorg-xprop: for picom-trans
+	optdepends = xorg-xwininfo: for picom-trans
+	backup = etc/xdg/picom.conf
+	source = git+https://github.com/yshui/picom.git?signed#tag=v12.5
+	validpgpkeys = A22F5C0F4FCF9C7C89A167462C965E9E5D45D730
+	b2sums = 6df1649e6b7842223b846e148ea59160a2b8c5513235a4f84f62387648b5f64cce39fefa65d40cef59e6fc02c40fff4f40d2b7c26158c132c3cc9ab651eb814c
+
+pkgname = picom

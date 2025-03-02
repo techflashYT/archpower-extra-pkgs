@@ -1,0 +1,67 @@
+# Maintainer: Alexander F. Rødseth <xyproto@archlinux.org>
+# Maintainer: Robin Candau <antiz@archlinux.org>
+# Contributor: WorMzy Tykashi <wormzy.tykashi@gmail.com>
+# Contributor: OK100 <ok100@lavabit.com>
+# Contributor: Valère Monseur <valere.monseur@ymail.com>
+
+pkgname=picom
+pkgver=12.5
+pkgrel=1
+pkgdesc='Lightweight compositor for X11'
+url='https://picom.app'
+arch=(x86_64 powerpc powerpc64 powerpc64le)
+license=('MPL-2.0 AND MIT')
+depends=(hicolor-icon-theme libconfig libdbus libepoxy libev libgl pcre2 pixman xcb-util-image xcb-util-renderutil)
+makedepends=(asciidoctor git mesa meson ninja setconf uthash)
+optdepends=('dbus: for controlling picom via D-Bus'
+            'python: for running picom-convgen.py'
+            'rtkit: for realtime scheduling priority'
+            'xorg-xprop: for picom-trans'
+            'xorg-xwininfo: for picom-trans')
+backup=(etc/xdg/picom.conf)
+source=("git+https://github.com/yshui/picom.git?signed#tag=v$pkgver")
+validpgpkeys=('A22F5C0F4FCF9C7C89A167462C965E9E5D45D730') # Yuxuan Shui <yshuiv7@gmail.com>
+b2sums=('6df1649e6b7842223b846e148ea59160a2b8c5513235a4f84f62387648b5f64cce39fefa65d40cef59e6fc02c40fff4f40d2b7c26158c132c3cc9ab651eb814c')
+
+prepare() {
+  cd $pkgname
+
+  # More subtle transparency in the default settings
+  setconf picom.sample.conf 'frame-opacity=0.9;'
+  setconf picom.sample.conf 'inactive-opacity=0.95;'
+  # Improve performance (recommended option)
+  setconf -u picom.sample.conf 'glx-no-stencil=true;'
+  # Force xrender as the default backend (default upstream value)
+  setconf -u picom.sample.conf 'backend="xrender"'
+  # Capitalize the desktop icon name for picom
+  setconf picom.desktop 'Name=Picom'
+  # Upstream does not appear to provide an icon for picom yet
+  setconf picom.desktop 'Icon=compton'
+}
+
+build() {
+  cd $pkgname
+
+  mkdir -p build
+  arch-meson --buildtype=release -D with_docs=true build
+  ninja -v -C build
+}
+
+check() {
+  cd $pkgname
+
+  ninja -C build test
+}
+
+package() {
+  cd $pkgname
+
+  DESTDIR="$pkgdir" ninja -C build install
+
+  # Default and example configuration
+  install -Dm 644 $pkgname.sample.conf "$pkgdir/etc/xdg/picom.conf"
+  install -Dm 644 $pkgname.sample.conf "$pkgdir/usr/share/doc/picom/picom.conf.example"
+
+  # License
+  install -Dm 644 LICENSES/MIT "$pkgdir/usr/share/licenses/$pkgname/MIT"
+}
