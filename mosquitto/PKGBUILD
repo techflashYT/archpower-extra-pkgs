@@ -1,0 +1,106 @@
+# Maintainer: Jelle van der Waa <jelle@archlinux.org>
+# Contributor: David Runge <dvzrv@archlinux.org>
+# Contributor: Radek Podgorny <radek@podgorny.cz>
+# Contributor: Dan Anderson <dan-anderson at cox dptnet>
+
+pkgname=mosquitto
+pkgver=2.0.20
+pkgrel=1
+pkgdesc="An Open Source MQTT Broker"
+arch=(x86_64 powerpc powerpc64 powerpc64le)
+url="https://mosquitto.org/"
+license=(
+  LicenseRef-EDL-1.0
+  EPL-2.0
+)
+depends=(
+  cjson
+  gcc-libs
+  glibc
+  openssl
+  util-linux-libs
+)
+makedepends=(
+  c-ares
+  cmake
+  docbook-xsl
+  libwebsockets
+  systemd
+  uthash
+)
+checkdepends=(
+  cunit
+  python
+  python-psutil
+)
+source=(
+  https://mosquitto.org/files/source/mosquitto-$pkgver.tar.gz{,.asc}
+  "$pkgname.service"
+  "sysusers_mosquitto.conf"
+)
+backup=("etc/$pkgname/$pkgname.conf")
+sha512sums=('4c16ff0ad0e9c6fe5c65ec5a82bef123d9e6490f42658d646e1fad60f098530b7cbbd743460c52d4dec8bc27698c84a557bd539b35ac6c81444539822a544c4c'
+            'SKIP'
+            '4d844ac5de505d1fb97052d291e4046d5da725e4cf78f8bc6b2a8d27426ac23f29983408b1904f5aa7985e8a4d6f6ed2938003b721a872e233dbb1c9d5be1ec2'
+            '22b7472ad47f077bef025c476ca9181b0e0ccefce84a7ee0b5a212a84ddd1e46f6f6e64b0722d9d359178c74e74920fe95bcee7ea895449f2aa26e284b4b11b1')
+validpgpkeys=('A0D6EEA1DCAE49A635A3B2F0779B22DFB3E717B7')
+
+prepare() {
+  # disable broken tests
+  sed '/02-subscribe-qos1/d' -i $pkgname-$pkgver/test/lib/{Makefile,test.py}
+  sed '/client test/d' -i $pkgname-$pkgver/test/Makefile
+}
+
+build() {
+  # /usr/bin/mosquitto uses malloc_usable_size, which is incompatible with fortification level 3
+  export CFLAGS="${CFLAGS/_FORTIFY_SOURCE=3/_FORTIFY_SOURCE=2}"
+  export CXXFLAGS="${CXXFLAGS/_FORTIFY_SOURCE=3/_FORTIFY_SOURCE=2}"
+
+  local cmake_options=(
+    -B build
+    -D CMAKE_BUILD_TYPE=None
+    -D CMAKE_INSTALL_PREFIX=/usr
+    -D CMAKE_INSTALL_SBINDIR=bin
+    -D CMAKE_INSTALL_SYSCONFDIR=/etc
+    -D WITH_BUNDLED_DEPS=OFF
+    -D WITH_SRV=ON
+    -D WITH_SYSTEMD=ON
+    -D WITH_WEBSOCKETS=ON
+    -S $pkgname-$pkgver
+    -W no-dev
+  )
+  cmake "${cmake_options[@]}"
+  cmake --build build --verbose
+}
+
+check() {
+  local plugin client
+
+  # NOTE: tests hardcode all paths... so we copy in place... -_-
+  cp -v build/lib/lib* $pkgname-$pkgver/lib/
+  cp -v build/lib/cpp/lib* $pkgname-$pkgver/lib/cpp/
+  cp -v build/src/$pkgname $pkgname-$pkgver/src/
+  for plugin in {dynamic-security,message-timestamp,payload-modification}; do
+    cp -v build/plugins/$plugin/*.so $pkgname-$pkgver/plugins/$plugin/
+  done
+  for client in {pub,rr,sub}; do
+    cp -v build/client/${pkgname}_$client $pkgname-$pkgver/client/
+  done
+
+  make -C $pkgname-$pkgver/test check
+}
+
+package() {
+  depends+=(
+    c-ares libcares.so
+    libwebsockets libwebsockets.so
+    systemd-libs libsystemd.so
+  )
+
+  DESTDIR="$pkgdir" cmake --install build
+
+  # TODO: upstream a better systemd service file
+  install -vDm 644 "$pkgname.service" -t "$pkgdir/usr/lib/systemd/system/"
+  install -vDm 644 $pkgname-$pkgver/edl-v10 -t "$pkgdir/usr/share/licenses/$pkgname/"
+  install -vDm 644 sysusers_mosquitto.conf "${pkgdir}"/usr/lib/sysusers.d/mosquitto.conf
+}

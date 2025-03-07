@@ -1,0 +1,4 @@
+[mosquitto]
+source = "git"
+git = "https://github.com/eclipse/mosquitto"
+prefix = "v"
