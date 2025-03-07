@@ -1,0 +1,4 @@
+[cowsay]
+source = "git"
+git = "https://github.com/cowsay-org/cowsay.git"
+prefix = "v"

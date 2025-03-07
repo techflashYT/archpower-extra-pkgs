@@ -1,0 +1,13 @@
+pkgbase = cowsay
+	pkgdesc = Configurable talking cow (and a bit more)
+	pkgver = 3.8.4
+	pkgrel = 1
+	url = https://cowsay.diamonds
+	arch = any
+	license = GPL-3.0-only
+	makedepends = git
+	depends = perl
+	source = git+https://github.com/cowsay-org/cowsay.git#tag=v3.8.4
+	sha256sums = 9903bad2f81823d70b7dbdfcbe0c18d269359a84572be8e926e3747561e05884
+
+pkgname = cowsay
