@@ -35,6 +35,14 @@ build() {
   cmake --build build --verbose
 }
 
+check() {
+  local ctest_flags=(
+    --test-dir build
+    --output-on-failure
+  )
+  ctest "${ctest_flags[@]}"
+}
+
 package() {
   DESTDIR="$pkgdir" cmake --install build
 }
