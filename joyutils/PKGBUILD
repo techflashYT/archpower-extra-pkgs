@@ -1,0 +1,29 @@
+# Maintainer: Alexander F. Rødseth <xyproto@archlinux.org>
+# Contributor: loqs
+# Contributor: Arkham <arkham@archlinux.us>
+# Contributor: dirty_d <andrew2085@gmail.com>
+
+pkgname=joyutils
+pkgver=1.8.1
+pkgrel=3
+pkgdesc='jscal, jstest, and jsattach utilities for the Linux joystick driver'
+arch=(x86_64 powerpc powerpc64 powerpc64le)
+license=(GPL)
+url='https://sourceforge.net/projects/linuxconsole'
+conflicts=(linuxconsole)
+depends=(sdl2)
+makedepends=(git)
+source=("$pkgname::git+https://git.code.sf.net/p/linuxconsole/code#tag=release-$pkgver")
+b2sums=('2192fa56f44676528cac98090d16c9748250bbf0e77a0878fc40cdb662dd530c6afe2374f718e794150b643aeb0f82e7cf5e1f36b3c2949ba7255a053d1facad')
+
+prepare() {
+  sed -i 's,IR)/lib,IR)$(PREFIX)/lib,g' $pkgname/utils/Makefile
+}
+
+build() {
+  PREFIX=/usr make -C $pkgname
+}
+
+package() {
+  DESTDIR="$pkgdir" PREFIX=/usr make -C $pkgname install
+}

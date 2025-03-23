@@ -1,0 +1,14 @@
+pkgbase = joyutils
+	pkgdesc = jscal, jstest, and jsattach utilities for the Linux joystick driver
+	pkgver = 1.8.1
+	pkgrel = 3
+	url = https://sourceforge.net/projects/linuxconsole
+	arch = x86_64
+	license = GPL
+	makedepends = git
+	depends = sdl2
+	conflicts = linuxconsole
+	source = joyutils::git+https://git.code.sf.net/p/linuxconsole/code#tag=release-1.8.1
+	b2sums = 2192fa56f44676528cac98090d16c9748250bbf0e77a0878fc40cdb662dd530c6afe2374f718e794150b643aeb0f82e7cf5e1f36b3c2949ba7255a053d1facad
+
+pkgname = joyutils
