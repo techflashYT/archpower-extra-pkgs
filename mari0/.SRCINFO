@@ -1,10 +1,10 @@
 pkgbase = mari0
 	pkgdesc = The Mario game with Portal gun mechanics
 	pkgver = 1.6.2
-	pkgrel = 4
+	pkgrel = 5
 	url = http://stabyourself.net/mari0/
 	arch = any
-	license = CCPL
+	license = MIT
 	makedepends = zip
 	depends = love
 	source = mari0.sh
