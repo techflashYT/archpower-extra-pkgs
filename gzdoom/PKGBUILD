@@ -10,7 +10,7 @@ depends=('gtk3'
          'libgl'
          'libvpx>=1.14'
          'openal'
-         'sdl2-compat'
+         'sdl2'
          'zmusic>=1.1.14')
 makedepends=('cmake' 'desktop-file-utils')
 optdepends=('blasphemer-wad: Blasphemer (free Heretic) game data'
