@@ -1,6 +1,6 @@
 pkgbase = iperf3
 	pkgdesc = TCP, UDP, and SCTP network bandwidth measurement tool
-	pkgver = 3.17.1
+	pkgver = 3.18
 	pkgrel = 1
 	url = https://github.com/esnet/iperf
 	arch = x86_64
@@ -9,8 +9,8 @@ pkgbase = iperf3
 	depends = openssl
 	depends = lksctp-tools
 	provides = libiperf.so
-	source = https://github.com/esnet/iperf/archive/refs/tags/3.17.1/iperf3-3.17.1.tar.gz
-	sha512sums = 54789c5a63081aa803575ce1df3cb251a3b0bb16313f049f2479ae3a5af39944ace1222d4a086bed0ab34821da73371b2499f8b8283791a953d861da4cfc56f0
-	b2sums = 5b353001feb6481ace714121004ca4e5299276ed29dd47ea3f8f0fcce847249bb5f40dcf68cf6f8c83e0a6ceff31151ca47e8343bf055c1f94d2fbe182502d6a
+	source = https://github.com/esnet/iperf/archive/refs/tags/3.18/iperf3-3.18.tar.gz
+	sha512sums = 468bbb040e8dc43c664854c823b7d79d9836da774a53f080fdd2258c836874247ca1f876dff490021e0ad3d38a00f972ffeea10eb149fb1fc75bf18e8fd9e974
+	b2sums = d1d32423950310b12c74dc92f899f97754a49ea7d2b8ded412b7307297de90957c54a813506073fee3697b34f6e3a8859d222f9cd2a2373d4901edbb326605f1
 
 pkgname = iperf3
