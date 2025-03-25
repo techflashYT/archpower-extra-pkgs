@@ -1,0 +1,36 @@
+# Maintainer: Alad Wenter <alad@archlinux.org>
+# Maintainer: Christian Hesse <mail@eworm.de>
+# Contributor: Giovanni Scafora <giovanni@archlinux.org>
+# Contributor: Lorenzo Nizzi Grifi Gargiolli <lorenzo.nizzi.grifi@gmail.com>
+# Contributor: marc0s <marc0s@fsfe.org>
+
+pkgname=pcsc-tools
+pkgver=1.7.1
+pkgrel=1
+pkgdesc='PC/SC Architecture smartcard tools'
+arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le')
+url='https://pcsc-tools.apdu.fr/'
+license=('GPL')
+depends=('pcsclite' 'pcsc-perl' 'glib-perl')
+makedepends=('pkg-config')
+optdepends=('perl-gtk3: gscriptor'
+            'perl-libintl-perl: gscriptor')
+validpgpkeys=('F5E11B9FFE911146F41D953D78A1B4DFE8F9C57E') # Ludovic Rousseau <rousseau@debian.org>
+source=("https://pcsc-tools.apdu.fr/${pkgname}-${pkgver}.tar.bz2"{,.asc})
+sha512sums=('fe60610122d05f97edf3462c9382b82c31ee75f1851db2d88088ebd378ea3f54b3112b1c1f59dd8315806f33b822e40f96d7bc186b8c5999ef339711f91136c0'
+            'SKIP')
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+
+  ./configure \
+    --prefix=/usr
+
+  make
+}
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+
+  make DESTDIR="${pkgdir}" install
+}
