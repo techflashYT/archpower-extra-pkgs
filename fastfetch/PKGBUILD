@@ -3,7 +3,7 @@
 
 pkgname=fastfetch
 pkgver=2.39.1
-pkgrel=1
+pkgrel=2
 pkgdesc="A feature-rich and performance oriented neofetch like system information tool"
 url="https://github.com/fastfetch-cli/fastfetch"
 arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le')
@@ -28,8 +28,15 @@ optdepends=('chafa: Image output as ascii art'
             'vulkan-icd-loader: Vulkan module & fallback for GPU output'
             'xfconf: Needed for XFWM theme and XFCE Terminal font'
             'zlib: Faster image output when using kitty graphics protocol')
-source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz")
-sha256sums=('ce24ba2763ebd736a1797f259da03c982b353ce0ad8641fa3626b98a17925b9e')
+source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz"
+	"0001-fix-cpu-reporting-ppc.patch")
+sha256sums=('ce24ba2763ebd736a1797f259da03c982b353ce0ad8641fa3626b98a17925b9e'
+            '33e40b28f256311e5d429edf1b5b0e67b4918c1cc17fbf0c909137328183451e')
+
+prepare() {
+	cd "$srcdir/${pkgname}-${pkgver}"
+	patch -p1 < ../0001-fix-cpu-reporting-ppc.patch
+}
 
 build() {
 	cmake -B build -S "${pkgname}-${pkgver}" \
