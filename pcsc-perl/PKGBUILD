@@ -1,0 +1,38 @@
+# Maintainer:
+# Contributor: Alad Wenter <alad@mailbox.org>
+# Contributor: Giovanni Scafora <giovanni@archlinux.org>
+# Contributor: neuromante <lorenzo.nizzi.grifi@gmail.com>
+# Contributor: marc0s <marc0s@fsfe.org>
+
+pkgname=pcsc-perl
+pkgver=1.4.16
+pkgrel=2
+pkgdesc="A Perl Module for PC/SC SmartCard access"
+arch=(x86_64 powerpc powerpc64 powerpc64le)
+url="https://pcsc-perl.apdu.fr/"
+license=(GPL-2.0-or-later)
+depends=(
+  glibc
+  pcsclite
+  perl
+)
+makedepends=(pkgconfig)
+options=(!emptydirs)
+source=($url/Chipcard-PCSC-v$pkgver.tar.gz{,.asc})
+sha256sums=('e81dd188601a8903f8b038ba88f6d902c73f9abec4d95cfdfe6da7d670fae9c1'
+            'SKIP')
+# Ludovic Rousseau <ludovic.rousseau@free.fr>
+validpgpkeys=('F5E11B9FFE911146F41D953D78A1B4DFE8F9C57E')
+
+build() {
+  cd Chipcard-PCSC-v$pkgver
+
+  # install module in vendor directories.
+  PERL_MM_USE_DEFAULT=1 perl Makefile.PL INSTALLDIRS=vendor
+}
+
+package() {
+  make DESTDIR="$pkgdir" install -C Chipcard-PCSC-v$pkgver
+  # set the library to be root-writable so it can be stripped
+  chmod 755 "$pkgdir"/usr/lib/perl*/*/vendor_perl/auto/Chipcard/PCSC/PCSC.so
+}

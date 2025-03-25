@@ -1,0 +1,19 @@
+pkgbase = pcsc-perl
+	pkgdesc = A Perl Module for PC/SC SmartCard access
+	pkgver = 1.4.16
+	pkgrel = 2
+	url = https://pcsc-perl.apdu.fr/
+	arch = x86_64
+	license = GPL-2.0-or-later
+	makedepends = pkgconfig
+	depends = glibc
+	depends = pcsclite
+	depends = perl
+	options = !emptydirs
+	source = https://pcsc-perl.apdu.fr//Chipcard-PCSC-v1.4.16.tar.gz
+	source = https://pcsc-perl.apdu.fr//Chipcard-PCSC-v1.4.16.tar.gz.asc
+	validpgpkeys = F5E11B9FFE911146F41D953D78A1B4DFE8F9C57E
+	sha256sums = e81dd188601a8903f8b038ba88f6d902c73f9abec4d95cfdfe6da7d670fae9c1
+	sha256sums = SKIP
+
+pkgname = pcsc-perl
