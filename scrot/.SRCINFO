@@ -1,9 +1,13 @@
 pkgbase = scrot
 	pkgdesc = Simple command-line screenshot utility for X
-	pkgver = 1.11.1
+	pkgver = 1.12.1
 	pkgrel = 1
 	url = https://github.com/resurrecting-open-source-projects/scrot
 	arch = x86_64
+	arch = powerpc
+	arch = powerpc64
+	arch = powerpc64le
+	arch = espresso
 	license = MIT
 	makedepends = autoconf-archive
 	makedepends = git
@@ -13,8 +17,8 @@ pkgbase = scrot
 	depends = libxfixes
 	depends = libxcomposite
 	depends = libbsd
-	source = git+https://github.com/resurrecting-open-source-projects/scrot.git#tag=1.11.1
-	sha512sums = 7cec419f31e5c2ad6c45166839535df6c6bc62a76f4b60e78a60571c2c952b1b4aed6b86bbdefb8b7e47af7373951fb0316403a4aecc596cc699d7ec734eb4e7
-	b2sums = c2674559fabffda7bb7fab53bd033c4aa207de3579a3d69e4de9a862aaa06d7547f6a7ebd6158bac2aa91ad8c9fbb9f82e806e1ff7fb144220566d06ae889dd4
+	source = git+https://github.com/resurrecting-open-source-projects/scrot.git#tag=1.12.1
+	sha512sums = fdda244965347c3e760b95799f800ac67f18de434205d8d762ff61a08c3f9c8033e2d704d443f0b95b72c0b3e1beb6a342107eb5fe86405d2356289bcf0a93ee
+	b2sums = e453888c8c337d11686697e87e759f54bbe8854035298a6d1a4f404d7f9bba6f27f47764cb5d311e6e8854a41d5c9cbe5be260ccadc0cbd1ad4235d86fbcf7e2
 
 pkgname = scrot

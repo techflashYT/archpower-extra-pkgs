@@ -6,10 +6,10 @@
 
 pkgname=picom
 pkgver=12.5
-pkgrel=1
+pkgrel=3
 pkgdesc='Lightweight compositor for X11'
 url='https://picom.app'
-arch=(x86_64 powerpc powerpc64 powerpc64le)
+arch=(x86_64 powerpc powerpc64 powerpc64le espresso)
 license=('MPL-2.0 AND MIT')
 depends=(hicolor-icon-theme libconfig libdbus libepoxy libev libgl pcre2 pixman xcb-util-image xcb-util-renderutil)
 makedepends=(asciidoctor git mesa meson ninja setconf uthash)

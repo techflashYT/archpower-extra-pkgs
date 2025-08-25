@@ -4,10 +4,10 @@
 # Contributor: Michael "Techflash" Garofalo <officialTechflashYT@gmail.com>
 pkgname=love
 pkgver=11.5
-pkgrel=1
+pkgrel=2
 pkgdesc="An open-source 2D game engine which uses the versatile Lua scripting language to create dynamic gaming experiences"
 # no ppc64 because luajit doesn't support it :/
-arch=(x86_64 powerpc powerpc64le)
+arch=(x86_64 powerpc powerpc64le espresso)
 url="http://love2d.org/"
 license=('zlib')
 depends=('luajit' 'freetype2' 'mpg123' 'openal' 'libvorbis' 'libmodplug' 'sdl2' 'shared-mime-info' 'hicolor-icon-theme' 'desktop-file-utils' 'libtheora')

@@ -1,7 +1,7 @@
 pkgbase = python-pyusb
 	pkgdesc = USB access on Python
-	pkgver = 1.2.1
-	pkgrel = 6
+	pkgver = 1.3.1
+	pkgrel = 1
 	url = https://github.com/pyusb/pyusb
 	arch = any
 	license = BSD-3-Clause
@@ -13,9 +13,9 @@ pkgbase = python-pyusb
 	makedepends = python-wheel
 	depends = python
 	depends = libusb
-	source = git+https://github.com/pyusb/pyusb.git?signed#tag=v1.2.1
+	source = git+https://github.com/pyusb/pyusb.git?signed#tag=v1.3.1
 	validpgpkeys = B04841AE800C1BF01FE1BC3D084C5584542E1574
 	validpgpkeys = 23F335ED4E829797734B22F65841AF7406AF7AD0
-	sha512sums = SKIP
+	sha512sums = 8a2722eca8fc8b22eccb384db03ac28ad0264cf7698eae3de097ddbd73ac88803a57f38deb528ec2915732b9cffeafd0e056d13c9d4227572b687a14f801c6e7
 
 pkgname = python-pyusb

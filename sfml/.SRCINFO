@@ -1,9 +1,13 @@
 pkgbase = sfml
 	pkgdesc = A simple, fast, cross-platform, and object-oriented multimedia API
-	pkgver = 3.0.0
+	pkgver = 3.0.1
 	pkgrel = 1
 	url = http://www.sfml-dev.org/
 	arch = x86_64
+	arch = powerpc
+	arch = powerpc64
+	arch = powerpc64le
+	arch = espresso
 	license = Zlib
 	makedepends = mesa
 	makedepends = cmake
@@ -22,7 +26,7 @@ pkgbase = sfml
 	provides = libsfml-system.so
 	provides = libsfml-audio.so
 	provides = libsfml-graphics.so
-	source = sfml-3.0.0.tar.gz::https://github.com/SFML/SFML/archive/3.0.0.tar.gz
-	sha512sums = 116b934950b02639aa0924cdf6ceaf34518be7f94037e77e52f374aa0a03403487ef58384137569d930961c7d65291a7f0bbddcf1eaf4260086f49afbfae1f27
+	source = sfml-3.0.1.tar.gz::https://github.com/SFML/SFML/archive/3.0.1.tar.gz
+	sha512sums = cee56eef93728aef9b361f8b1080572532ce5247c80a9d1be53b30dab4d67e8588316890555d4c4ba423e87b09f954327d70615e1ba72d458d8238fa84e589f9
 
 pkgname = sfml

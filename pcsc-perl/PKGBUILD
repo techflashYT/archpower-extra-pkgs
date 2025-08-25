@@ -6,9 +6,9 @@
 
 pkgname=pcsc-perl
 pkgver=1.4.16
-pkgrel=2
+pkgrel=3
 pkgdesc="A Perl Module for PC/SC SmartCard access"
-arch=(x86_64 powerpc powerpc64 powerpc64le)
+arch=(x86_64 powerpc powerpc64 powerpc64le espresso)
 url="https://pcsc-perl.apdu.fr/"
 license=(GPL-2.0-or-later)
 depends=(

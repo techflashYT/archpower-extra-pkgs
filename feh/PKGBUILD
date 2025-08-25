@@ -11,7 +11,7 @@ pkgrel=1
 pkgdesc='Fast and light imlib2-based image viewer'
 url='https://feh.finalrewind.org/'
 license=('custom:MIT')
-arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le')
+arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le' 'espresso')
 depends=('curl' 'file' 'imlib2' 'libexif' 'libxinerama')
 optdepends=('imagemagick: support more file formats'
             'jpegexiforient: set exif rotation tag')

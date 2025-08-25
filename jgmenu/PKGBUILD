@@ -3,9 +3,9 @@
 
 pkgname=jgmenu
 pkgver=4.5.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Simple, independent, contemporary-looking X11 menu, designed for scripting, ricing and tweaking"
-arch=('i686' 'x86_64' 'powerpc' 'powerpc64' 'powerpc64le')
+arch=('i686' 'x86_64' 'powerpc' 'powerpc64' 'powerpc64le' 'espresso')
 url="https://www.github.com/johanmalm/jgmenu"
 license=('GPL')
 depends=('libx11' 'cairo' 'pango' 'libxrandr' 'librsvg' 'libxml2' 'glib2' 'menu-cache' 'python')

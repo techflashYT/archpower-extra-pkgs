@@ -8,15 +8,15 @@
 _pkgname=pyusb
 pkgname=python-$_pkgname
 pkgdesc='USB access on Python'
-pkgver=1.2.1
-pkgrel=6
+pkgver=1.3.1
+pkgrel=1
 arch=('any')
 url='https://github.com/pyusb/pyusb'
 license=('BSD-3-Clause')
 depends=('python' 'libusb')
 makedepends=('git' 'python-setuptools-scm' 'python-setuptools' 'python-build' 'python-installer' 'python-wheel')
 source=("git+$url.git?signed#tag=v$pkgver")
-sha512sums=('SKIP')
+sha512sums=('8a2722eca8fc8b22eccb384db03ac28ad0264cf7698eae3de097ddbd73ac88803a57f38deb528ec2915732b9cffeafd0e056d13c9d4227572b687a14f801c6e7')
 validpgpkeys=('B04841AE800C1BF01FE1BC3D084C5584542E1574'  # Wander Lairson Costa <wcosta@mozilla.com>
               '23F335ED4E829797734B22F65841AF7406AF7AD0') # Jonas Tadeu Silva Malaco Filho <jonas@jonasmalaco.com>
 

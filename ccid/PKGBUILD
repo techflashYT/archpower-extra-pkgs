@@ -2,38 +2,29 @@
 # Contributor: Daniel Plaza <daniel.plaza.espi@gmail.com>
 
 pkgname=ccid
-pkgver=1.5.5
+pkgver=1.6.2
 pkgrel=1
 pkgdesc='A generic USB Chip/Smart Card Interface Devices driver'
-arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le')
+arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le' 'espresso')
 url='https://ccid.apdu.fr/'
 license=('LGPL' 'GPL')
 depends=('pcsclite' 'libusb' 'flex')
+makedepends=('meson')
 backup=('etc/reader.conf.d/libccidtwin')
 validpgpkeys=('F5E11B9FFE911146F41D953D78A1B4DFE8F9C57E') # Ludovic Rousseau <ludovic.rousseau@free.fr>
-source=("https://ccid.apdu.fr/files/${pkgname}-${pkgver}.tar.bz2"{,.asc})
-sha256sums=('194708f75fe369d45dd7c15e8b3e8a7db8b49cfc5557574ca2a2e76ef12ca0ca'
+source=("https://ccid.apdu.fr/files/${pkgname}-${pkgver}.tar.xz"{,.asc})
+sha256sums=('41958410950157e622f9d91c9e78c7b708db74e22f71190c581d24d20564d449'
             'SKIP')
 
 build() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
-
-  ./configure \
-    LEXLIB='' \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --enable-twinserial \
-    --enable-serialconfdir=/etc/reader.conf.d
-  make
+  arch-meson "${pkgname}-${pkgver}" build \
+    -Dclass=true \
+    -Dserial=true
+  meson compile -C build
 }
 
 package() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
+  meson install -C build --destdir "${pkgdir}"
 
-  make DESTDIR="${pkgdir}" install
-  # move the configuration file in /etc and create a symbolic link
-  mv "${pkgdir}/usr/lib/pcsc/drivers/ifd-ccid.bundle/Contents/Info.plist" "${pkgdir}/etc/libccid_Info.plist"
-  ln -s /etc/libccid_Info.plist "${pkgdir}/usr/lib/pcsc/drivers/ifd-ccid.bundle/Contents/Info.plist"
-
-  install -Dm644 src/92_pcscd_ccid.rules "${pkgdir}/usr/lib/udev/rules.d/92_pcscd_ccid.rules"
+  install -D -m0644 "${pkgname}-${pkgver}/src/92_pcscd_ccid.rules" "${pkgdir}/usr/lib/udev/rules.d/92_pcscd_ccid.rules"
 }

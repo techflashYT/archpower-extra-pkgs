@@ -5,10 +5,10 @@
 # Contributor: marc0s <marc0s@fsfe.org>
 
 pkgname=pcsc-tools
-pkgver=1.7.1
+pkgver=1.7.3
 pkgrel=1
 pkgdesc='PC/SC Architecture smartcard tools'
-arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le')
+arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le' 'espresso')
 url='https://pcsc-tools.apdu.fr/'
 license=('GPL')
 depends=('pcsclite' 'pcsc-perl' 'glib-perl')
@@ -17,7 +17,7 @@ optdepends=('perl-gtk3: gscriptor'
             'perl-libintl-perl: gscriptor')
 validpgpkeys=('F5E11B9FFE911146F41D953D78A1B4DFE8F9C57E') # Ludovic Rousseau <rousseau@debian.org>
 source=("https://pcsc-tools.apdu.fr/${pkgname}-${pkgver}.tar.bz2"{,.asc})
-sha512sums=('fe60610122d05f97edf3462c9382b82c31ee75f1851db2d88088ebd378ea3f54b3112b1c1f59dd8315806f33b822e40f96d7bc186b8c5999ef339711f91136c0'
+sha512sums=('2659d5d3d1de147fc5373aaf1bea27692d57ace1f9cd19b2181c0ef43d94c77ecff78f4c784238b9ee05f154550535eb966814f1bd9143ad7ae6842f8b92d5c0'
             'SKIP')
 
 build() {

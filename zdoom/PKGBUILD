@@ -1,11 +1,13 @@
-# Maintainer: Jan Cholasta <grubber at grubber cz>
+# Maintainer: envolution
+# Contributor: Jan Cholasta <grubber at grubber cz>
 # Contributor: Andrew Rabert <arabert@nullsum.net>
+# shellcheck shell=bash disable=SC2034,SC2154
 
 pkgname=zdoom
 pkgver=2.8.1
-pkgrel=6
+pkgrel=8
 pkgdesc='Advanced Doom source port'
-arch=('i686' 'x86_64' 'powerpc')
+arch=('i686' 'x86_64' 'powerpc' 'powerpc64' 'powerpc64le' 'espresso')
 url='http://www.zdoom.org/'
 license=('BSD' 'custom:BUILD' 'custom:doom' 'custom:dumb' 'LGPL')
 depends=('gtk2'
@@ -43,14 +45,16 @@ source=("http://zdoom.org/files/zdoom/${pkgver%.${pkgver#*.*.}}/zdoom-${pkgver}-
         'zdoom.desktop'
         '0001-Fix-file-paths.patch'
         '0002-Improve-Mac-GCC-errors-fix-to-work-only-for-GCC.patch'
-        '0003-no-fpu-settings-on-ppc.patch'
-        '0004-fix-swap-error-on-ppc.patch'
-        '0005-add-libatomic-for-ppc.patch')
+        '0003-modern-cmake.patch'
+        '0004-no-fpu-settings-on-ppc.patch'
+        '0005-fix-swap-error-on-ppc.patch'
+        '0006-add-libatomic-for-ppc.patch')
 noextract=("${source[0]##*/}")
 sha256sums=('782179d4667d2e56e26e21d7a0872523f8e4262ed176072fef00d0043376a310'
             'e8932a559baf30ecbfc062546ca014c6dfb70f76d1570549654209d39157e350'
             '2e9edd1f776a1e706f21e35b6f066fcd086dece2e9e4e0832ab9714658ff6b6b'
             '3de616393fa2eea8540c59c983a4394b29a0a0220095297a3f47e4f721b8d9fb'
+            'd89cd17ef6f1fa380c18780472a3a5942eaabf6d5d7ab89820cb91f80968df9a'
             'ddabd0f7ddc6df3a2799938b70e8b70d00988659efd80fd9ec0f309e86e71446'
             'da4273d295344c790ed969a523847fbb00dd181f5e485b5075a1a319f4e9b779'
             '26ca6329e9efad595ce64e2c00e97883a86c08fdc2634e0049dab3f8422f31e6')
@@ -60,33 +64,31 @@ prepare() {
     cd zdoom
     patch -i "$srcdir"/0001-Fix-file-paths.patch -p 1
     patch -i "$srcdir"/0002-Improve-Mac-GCC-errors-fix-to-work-only-for-GCC.patch -p 1
-    patch -i "$srcdir"/0003-no-fpu-settings-on-ppc.patch -p 1
-    patch -i "$srcdir"/0004-fix-swap-error-on-ppc.patch -p 1
-    patch -i "$srcdir"/0005-add-libatomic-for-ppc.patch -p 1
+    patch -i "$srcdir"/0003-modern-cmake.patch -p 1
+    patch -i "$srcdir"/0004-no-fpu-settings-on-ppc.patch -p 1
+    patch -i "$srcdir"/0005-fix-swap-error-on-ppc.patch -p 1
+    patch -i "$srcdir"/0006-add-libatomic-for-ppc.patch -p 1
 }
 
 build() {
-    # on PowerPC there's errors relating to this
-    # disable treating such warnings as errors to get it to build
-    CFLAGS+=" -Wno-error=narrowing -fno-sanitize=all "
-    CXXFLAGS+=" -Wno-error=narrowing  -fno-sanitize=all "
     cd zdoom
     mkdir -p build
-
-    # PPC also needs to link in libatomic here due to a GCC quirk
-    # this can be removed once GCC fixes it, but with the current
-    # version in the repos, it needs to be forcibly linked in.
     cmake -B build \
           -D CMAKE_BUILD_TYPE=Release \
           -D NO_FMOD=ON \
           -D GME_INCLUDE_DIR=/usr/include/gme \
           -D FORCE_INTERNAL_GME=OFF \
-          -D CMAKE_CXX_FLAGS="$CXXFLAGS -ffile-prefix-map=\"$PWD\"=. -DSHARE_DIR=\\\"/usr/share/zdoom\\\"" \
+          -D CMAKE_C_FLAGS="-std=gnu89" \
+          -D CMAKE_CXX_FLAGS="$CXXFLAGS \
+            -ffile-prefix-map=\"$PWD\"=. \
+            -DSHARE_DIR=\\\"/usr/share/zdoom\\\"" \
           -D CMAKE_EXE_LINKER_FLAGS="$LDFLAGS -Wl,-z,noexecstack" \
+          -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+          -DCMAKE_CXX_STANDARD=17 \
           .
-    make -C build VERBOSE=1
+    make -C build
     sed -n '/\*\*-/,/\*\*-/p' src/version.h >bsd.txt
-    convert 'src/win32/icon1.ico[2]' zdoom.xpm
+    magick 'src/win32/icon1.ico[2]' zdoom.xpm
 }
 
 package() {
@@ -102,4 +104,4 @@ package() {
     install zdoom.xpm -D -m 644 "$pkgdir"/usr/share/icons/hicolor/48x48/apps/zdoom.xpm
 }
 
-# vim: ts=2 sw=2 et:
+# vim:set ts=2 sw=2 et:

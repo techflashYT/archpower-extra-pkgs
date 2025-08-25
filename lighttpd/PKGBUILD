@@ -1,11 +1,11 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=lighttpd
-pkgver=1.4.77
+pkgver=1.4.81
 pkgrel=1
 pkgdesc='A secure, fast, compliant and very flexible web-server'
 license=('BSD-3-Clause')
-arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le')
+arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le' 'espresso')
 url="https://www.lighttpd.net/"
 depends=(
 	'pcre2'
@@ -45,7 +45,7 @@ source=(
 	'lighttpd.conf'
 	'lighttpd.tmpfiles'
 )
-sha256sums=('93f43956daed12e40ead0ea6a76e55d034c298555f25f1d3a2310f437a3c65ba'
+sha256sums=('d0482bd32976fe5a6accc88c844ea8c1ba703f6ae5cf1be31dcb8f862c5edf5f'
             '41f6c0042bb61021553779f861910e335834f6c15e4411756cdc6233b31076fe'
             '3aaa31c3d200e5346e9b8bb0eec293c2b7582598f3baf46537f05b46d6d4becd'
             'da6878d1649572259f29ae50236a129ff131c9b1730af81498581824cf8c4c35')
@@ -84,7 +84,8 @@ package() {
 	install -D -m644 lighttpd.conf "${pkgdir}"/etc/lighttpd/lighttpd.conf
 	install -d -m700 -o 33 -g 33 "${pkgdir}"/var/{log,cache}/lighttpd/
 	install -D -m644 lighttpd.tmpfiles "${pkgdir}"/usr/lib/tmpfiles.d/lighttpd.conf
-	install -D -m644 -t "${pkgdir}"/usr/lib/systemd/system/ ${pkgname}1.4/doc/systemd/lighttpd.{service,socket}
+	install -D -m644 -t "${pkgdir}"/usr/lib/systemd/system/ ${pkgname}1.4/doc/systemd/lighttpd.service
+	install -D -m644 -t "${pkgdir}"/usr/lib/systemd/system/ ${pkgname}1.4/doc/systemd/lighttpd-{http,https}-{ipv4,ipv6}.socket
 
 	pushd ${pkgname}1.4/doc/config >/dev/null
 	find . -type f ! -name 'Makefile*' -exec install -D -m644 {} "${pkgdir}"/usr/share/doc/lighttpd/config/{} \;

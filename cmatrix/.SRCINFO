@@ -1,9 +1,13 @@
 pkgbase = cmatrix
 	pkgdesc = A curses-based scrolling 'Matrix'-like screen
 	pkgver = 2.0
-	pkgrel = 3
+	pkgrel = 4
 	url = https://www.asty.org/cmatrix/
 	arch = x86_64
+	arch = powerpc
+	arch = powerpc64
+	arch = powerpc64le
+	arch = espresso
 	license = GPL3
 	makedepends = cmake
 	depends = ncurses

@@ -1,7 +1,7 @@
 pkgbase = mari0
 	pkgdesc = The Mario game with Portal gun mechanics
 	pkgver = 1.6.2
-	pkgrel = 5
+	pkgrel = 6
 	url = http://stabyourself.net/mari0/
 	arch = any
 	license = MIT
@@ -10,7 +10,7 @@ pkgbase = mari0
 	source = mari0.sh
 	source = mari0.desktop
 	source = mari0-1.6.2.tar.gz::https://github.com/Stabyourself/mari0/archive/1.6.2.tar.gz
-	sha512sums = 84d237f82ba1ad5d6c52d66d27469de7044572626381af07230b46a476eb077bce94329408cf4e0c0f4ae1c90a7adf6562dc1ca795591a7687608a253af6b705
+	sha512sums = 7f5247d5d11ab64eb6aff96232be42e8f57aabfc075b9a36cd4fc3ed43f5289488f83a61c2ec6af1b0e95058472793ded5f0d72b152d400c581dbab682262394
 	sha512sums = 0e9f73b5e0c5fe897b4587b30be379380e563f4eef0610fdf88d23a72265333d182ec6164f5c7c9313f81be68b40cc5b579bd5a2e468138445301e4c56c64499
 	sha512sums = 3d1353f12f02fd993e309cac7ab653c3cbc8a60e8585663186870b5ea49542f46ec2c554711bba710febaf3ad73c7bf66cfba2ccbe4831aa7d5cb2fe5aab8992
 

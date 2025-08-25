@@ -1,9 +1,13 @@
 pkgbase = picom
 	pkgdesc = Lightweight compositor for X11
 	pkgver = 12.5
-	pkgrel = 1
+	pkgrel = 3
 	url = https://picom.app
 	arch = x86_64
+	arch = powerpc
+	arch = powerpc64
+	arch = powerpc64le
+	arch = espresso
 	license = MPL-2.0 AND MIT
 	makedepends = asciidoctor
 	makedepends = git

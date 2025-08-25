@@ -1,10 +1,14 @@
 pkgbase = jgmenu
 	pkgdesc = Simple, independent, contemporary-looking X11 menu, designed for scripting, ricing and tweaking
 	pkgver = 4.5.0
-	pkgrel = 1
+	pkgrel = 2
 	url = https://www.github.com/johanmalm/jgmenu
 	arch = i686
 	arch = x86_64
+	arch = powerpc
+	arch = powerpc64
+	arch = powerpc64le
+	arch = espresso
 	license = GPL
 	depends = libx11
 	depends = cairo
