@@ -1,0 +1,23 @@
+pkgbase = iortcw-data
+	pkgdesc = Return to Castle Wolfenstein Single Player pk3s files (shared use)
+	pkgver = 1.51c
+	pkgrel = 5
+	url = https://github.com/iortcw/iortcw
+	install = iortcw-data.install
+	arch = any
+	license = GPL3
+	noextract = sp_pak2.pk3
+	noextract = mp_pak1.pk3
+	noextract = mp_pak2.pk3
+	source = https://github.com/iortcw/iortcw/releases/download/1.51c/patch-data-141.zip
+	source = https://github.com/M0Rf30/rtcw-assets/raw/master/sp_pak2.pk3
+	source = https://github.com/M0Rf30/rtcw-assets/raw/master/mp_pak1.pk3
+	source = https://github.com/M0Rf30/rtcw-assets/raw/master/mp_pak2.pk3
+	source = openurl.sh
+	sha256sums = 7fe0f5d04967bd3f2f66017a832d1bffec8796a04cf651401c0ff3d5024f3e47
+	sha256sums = eca64ea0fda6edd653865e2eb768f152d38abc8b89941aa954ed74fa36928796
+	sha256sums = 248ff7c6a4c12f3fc08e0bb73a0602ffdb2e31c4a4c50929d76fa5f814cbf974
+	sha256sums = 0a9142be2539427189cc9b31d5af188298ce3e4c8f06d752e1809d22046b7b03
+	sha256sums = 111e4bd7d77d71cbb0a09682310b5a0534859e6cb66aeadd3fad548f9d95558b
+
+pkgname = iortcw-data
