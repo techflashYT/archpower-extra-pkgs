@@ -106,3 +106,9 @@ package() {
   install -vDm 644 $pkgname-$pkgver/edl-v10 -t "$pkgdir/usr/share/licenses/$pkgname/"
   install -vDm 644 sysusers_mosquitto.conf "${pkgdir}"/usr/lib/sysusers.d/mosquitto.conf
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

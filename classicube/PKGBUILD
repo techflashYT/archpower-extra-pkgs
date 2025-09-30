@@ -67,3 +67,9 @@ package() {
   # TODO: Use upstream launch script directly by 1.3.8
   install -Dm755 ../ClassiCubeLauncher "$pkgdir/usr/bin/ClassiCubeLauncher"
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

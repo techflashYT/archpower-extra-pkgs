@@ -33,3 +33,9 @@ package() {
   install -D -m644 COPYING "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
   install -D -Dm644 $srcdir/$pkgname.desktop "$pkgdir"/usr/share/xsessions/$pkgname.desktop
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

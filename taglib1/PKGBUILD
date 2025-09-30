@@ -53,3 +53,9 @@ package() {
   ln -sv "$pkgname/libtag.so.1" "$pkgdir/usr/lib/libtag.so.1"
   ln -sv "$pkgname/libtag_c.so.0" "$pkgdir/usr/lib/libtag_c.so.0"
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

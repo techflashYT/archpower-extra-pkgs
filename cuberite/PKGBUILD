@@ -133,3 +133,9 @@ package() {
 	# Give the group write permissions and set user or group ID on execution
 	chmod g+s "${pkgdir}${_server_root}"
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

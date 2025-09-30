@@ -28,3 +28,9 @@ package() {
 
   install -D -m0644 "${pkgname}-${pkgver}/src/92_pcscd_ccid.rules" "${pkgdir}/usr/lib/udev/rules.d/92_pcscd_ccid.rules"
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

@@ -51,3 +51,9 @@ package() {
             -t "$pkgdir/usr/lib/systemd/system/"
     install -Dm644 "sysuser.conf" "$pkgdir/usr/lib/sysusers.d/seatd.conf"
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

@@ -41,3 +41,9 @@ package() {
   install -Dm644 -t "$pkgdir/usr/share/zsh/site-functions/" "completions/zsh/_$pkgname"
   install -Dm644 -t "$pkgdir/usr/share/fish/vendor_completions.d/" "completions/fish/$pkgname.fish"
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

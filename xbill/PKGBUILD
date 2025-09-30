@@ -38,3 +38,9 @@ package() {
 # Handle the scores file creation in the install script
   rm "${pkgdir}/var/games/xbill/scores"
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

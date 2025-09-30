@@ -60,3 +60,9 @@ package() {
   rm "$pkgdir"/$site_packages/pipenv/patched/pip/_vendor/certifi/cacert.pem
   ln -sf /etc/ssl/certs/ca-certificates.crt "$pkgdir"/$site_packages/pipenv/patched/pip/_vendor/certifi/cacert.pem
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

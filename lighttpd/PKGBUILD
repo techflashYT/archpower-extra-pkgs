@@ -93,3 +93,9 @@ package() {
 
 	install -D -m644 ${pkgname}1.4/COPYING "${pkgdir}"/usr/share/licenses/${pkgname}/COPYING
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

@@ -36,3 +36,9 @@ package() {
   # set the library to be root-writable so it can be stripped
   chmod 755 "$pkgdir"/usr/lib/perl*/*/vendor_perl/auto/Chipcard/PCSC/PCSC.so
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

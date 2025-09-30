@@ -51,3 +51,9 @@ package() {
   install -Dm644 "$srcdir/rox.svg" "$pkgdir/usr/share/pixmaps/rox.svg"
   install -Dm644 "$srcdir/rox.png" "$pkgdir/usr/share/pixmaps/rox.png"
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

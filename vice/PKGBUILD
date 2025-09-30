@@ -66,3 +66,9 @@ package_vice-sdl2() {
   conflicts=(vice)
   make -C $pkgbase-sdl2 DESTDIR="$pkgdir" realdocdir=/usr/share/doc/vice install
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

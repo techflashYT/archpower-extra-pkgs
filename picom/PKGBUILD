@@ -65,3 +65,9 @@ package() {
   # License
   install -Dm 644 LICENSES/MIT "$pkgdir/usr/share/licenses/$pkgname/MIT"
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+

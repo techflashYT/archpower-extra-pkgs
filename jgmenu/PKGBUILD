@@ -27,3 +27,9 @@ package() {
 	cd "$pkgname-$pkgver"
 	make DESTDIR="$pkgdir" prefix=/usr install
 }
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+
