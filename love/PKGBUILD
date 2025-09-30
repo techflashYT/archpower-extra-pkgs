@@ -4,7 +4,7 @@
 # Contributor: Michael "Techflash" Garofalo <officialTechflashYT@gmail.com>
 pkgname=love
 pkgver=11.5
-pkgrel=2
+pkgrel=3
 pkgdesc="An open-source 2D game engine which uses the versatile Lua scripting language to create dynamic gaming experiences"
 # no ppc64 because luajit doesn't support it :/
 arch=(x86_64 powerpc powerpc64le espresso)
@@ -20,8 +20,8 @@ sha512sums=('86fe29939e0d48317e742c99c80b1805821f91539c37d1701207585593b10e3a12f
 
 prepare() {
   cd "$srcdir"/love-$pkgver
-
   patch -p1 < ../no_hashing_on_be.patch
+  autoreconf -fiv
 }
 
 build() {
