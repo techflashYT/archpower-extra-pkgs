@@ -1,0 +1,4 @@
+[magic-wormhole]
+source = "github"
+github = "magic-wormhole/magic-wormhole"
+use_latest_tag = true
