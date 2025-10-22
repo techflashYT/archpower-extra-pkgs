@@ -1,0 +1,20 @@
+pkgbase = python-humanize
+	pkgdesc = Common humanization utilities for Python
+	pkgver = 4.14.0
+	pkgrel = 1
+	url = https://github.com/python-humanize/humanize
+	arch = any
+	license = MIT
+	checkdepends = python-coverage
+	checkdepends = python-freezegun
+	checkdepends = python-pytest
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-wheel
+	makedepends = python-hatch-vcs
+	makedepends = python-hatchling
+	depends = python
+	source = https://pypi.python.org/packages/source/h/humanize/humanize-4.14.0.tar.gz
+	sha256sums = 2fa092705ea640d605c435b1ca82b2866a1b601cdf96f076d70b79a855eba90d
+
+pkgname = python-humanize

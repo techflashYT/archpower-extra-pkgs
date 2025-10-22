@@ -1,0 +1,3 @@
+[python-humanize]
+source = "pypi"
+pypi = "humanize"
