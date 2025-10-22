@@ -1,0 +1,4 @@
+[python-magic-wormhole-mailbox-server]
+source = "github"
+github = "magic-wormhole/magic-wormhole-mailbox-server"
+use_latest_tag = true

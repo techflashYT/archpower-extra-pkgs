@@ -1,0 +1,21 @@
+pkgbase = python-magic-wormhole-mailbox-server
+	pkgdesc = the rendezvous/mailbox server for magic-wormhole clients
+	pkgver = 0.5.1
+	pkgrel = 2
+	url = https://github.com/magic-wormhole/magic-wormhole-mailbox-server
+	arch = any
+	license = MIT
+	checkdepends = python-pytest
+	checkdepends = python-treq
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-wheel
+	makedepends = python-setuptools
+	makedepends = python-versioneer
+	depends = python-autobahn
+	depends = python-twisted
+	source = python-magic-wormhole-mailbox-server-0.5.1.tar.gz::https://github.com/magic-wormhole/magic-wormhole-mailbox-server/archive/refs/tags/0.5.1.tar.gz
+	sha512sums = 0e67f76da27bad404a23417a8b8080503cfbf5e142bd6f6df7def38b6a8851bc950e98e2b481a729d5342076af883e69c8628c9a1af5b09aa57caa7af72f6b49
+	b2sums = ef2dfb69e8dc9015c2ef252ccee13fcce3126a5193bf9b3fc54d38ef99a1f85e65271bc62803b8d85fc14dd45575a25f60afe4d50a6528e2b9a4bedd16bf5866
+
+pkgname = python-magic-wormhole-mailbox-server
