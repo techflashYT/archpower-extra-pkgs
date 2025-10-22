@@ -1,0 +1,5 @@
+[python-spake2]
+source = "github"
+github = "warner/python-spake2"
+use_latest_tag = true
+prefix = "v"

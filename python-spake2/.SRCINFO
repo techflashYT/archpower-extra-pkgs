@@ -1,0 +1,17 @@
+pkgbase = python-spake2
+	pkgdesc = Pure-python implementation of the SPAKE2 Password-Authenticated Key
+	pkgver = 0.9
+	pkgrel = 1
+	url = https://github.com/warner/python-spake2
+	arch = any
+	license = MIT
+	checkdepends = python-pytest
+	makedepends = python-setuptools
+	makedepends = python-versioneer
+	depends = python
+	depends = python-hkdf
+	depends = python-cryptography
+	source = python-spake2-0.9.tar.gz::https://github.com/warner/python-spake2/archive/refs/tags/v0.9.tar.gz
+	sha512sums = 557b17b8e28214b9c2cd0362c991ac0f61996812fd747e66397c48fdbbb314eb4e9acba9670ca41d0924f4b688931f2b32a7e9ba947ee1db3df00e9e9670d497
+
+pkgname = python-spake2
