@@ -1,0 +1,78 @@
+# Maintainer: Morten Linderud <foxboron@archlinux.org>
+# Maintainer: Chih-Hsuan Yen <yan12125@archlinux.org>
+# Maintainer: Anatol Pomozov
+
+pkgname=python-autobahn
+# https://github.com/crossbario/autobahn-python/blob/master/docs/changelog.rst
+pkgver=24.4.2
+pkgrel=3
+pkgdesc='Real-time framework for Web, Mobile & Internet of Things'
+arch=(x86_64 powerpc powerpc64 powerpc64le espresso)
+url='https://github.com/crossbario/autobahn-python/'
+license=(MIT)
+depends=(glibc python python-cffi python-twisted python-txaio python-wsaccel
+         python-cryptography python-hyperlink python-zope-interface)
+makedepends=(git python-build python-installer python-setuptools python-wheel
+             python-argon2_cffi python-cbor2 python-flatbuffers
+             python-msgpack python-passlib python-pynacl python-pytrie
+             python-ubjson
+             python-u-msgpack python-ujson python-qrcode python-pyopenssl
+             python-snappy python-click python-txtorcon)
+#checkdepends=(python-pytest python-pytest-asyncio)
+optdepends=(
+  'python-cbor2: CBOR serializer support'
+  'python-flatbuffers: FlatBuffers serializer support'
+  'python-msgpack: MsgPack serializer support'
+  'python-u-msgpack: pure-python alternative to python-msgpack for MsgPack serializer support'
+  'python-ubjson: UBJSON serializer support'
+  'python-ujson: accelerated JSON serializer support'
+  'python-argon2_cffi: WAMP-SCRAM authentication support'
+  'python-passlib: WAMP-SCRAM authentication support'
+  'python-pynacl: WAMP-cryptosign and WAMP-cryptobox support'
+  'python-pytrie: WAMP-cryptobox support'
+  'python-qrcode: support QR codes in WAMP'
+  'python-pyopenssl: SSL/TLS support'
+  'python-snappy: snappy compression suppport for WebSocket messages'
+  'python-click: for text highlights'
+  'python-txtorcon: connections to Tor Onion services'
+)
+
+source=("git+https://github.com/crossbario/autobahn-python.git#tag=v$pkgver")
+sha256sums=('2850e7a45ce0c466a460b09433e23d3a6bba5914fa3596428ca7233ef6815204')
+
+prepare() {
+  cd "$srcdir/autobahn-python"
+  # For reproducibility
+  # If Arch decides to increase CPU requirements [1], -march=native can be
+  # replaced with -march=nehalem so that the SSE 4.1 implementation is built
+  # [1] https://gitlab.archlinux.org/archlinux/rfcs/-/blob/master/rfcs/0002-march.rst
+  sed -i "s#, '-march=native'##" autobahn/nvx/_utf8validator.py
+
+  # Backport a commit [1] to fix compatibility with pytest-asyncio 0.24.0, which is stricter about pytest marks [2]
+  # [1] https://github.com/crossbario/autobahn-python/pull/1647
+  # [2] https://github.com/pytest-dev/pytest-asyncio/pull/886
+  git cherry-pick -n 7bc85b34e200640ab98a41cfddb38267f39bc92e
+}
+
+build() {
+  cd "$srcdir/autobahn-python"
+  python -m build --wheel --no-isolation
+}
+
+# tests are broken on PPC due to unrelated issues
+#check() {
+#  cd "$srcdir/autobahn-python"
+#  pyver=$(python -c "import sys; print('{}{}'.format(*sys.version_info[:2]))")
+  # "autobahn on asyncio is tested using pytest, while for twisted we are using twisted trial"
+  # https://github.com/crossbario/autobahn-python/issues/1235#issuecomment-522440810
+#  USE_TWISTED=1 PYTHONPATH=.:build/lib.linux-$CARCH-cpython-$pyver trial autobahn
+  # pytest configurations are not well organized in upstream repo. Here I ignore everything and pick needed options from
+  # https://github.com/crossbario/autobahn-python/blob/v24.4.2/tox.ini#L104
+#  USE_ASYNCIO=1 PYTHONPATH=.:build/lib.linux-$CARCH-cpython-$pyver pytest autobahn --config-file=/dev/null --rootdir "$PWD" --ignore autobahn/twisted
+#}
+
+package() {
+  cd "$srcdir/autobahn-python"
+  python -m installer --destdir="$pkgdir" dist/*.whl
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
