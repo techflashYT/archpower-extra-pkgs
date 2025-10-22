@@ -1,0 +1,47 @@
+# Maintainer: David Runge <dvzrv@archlinux.org>
+# Maintainer: Caleb Maclennan <caleb@alerque.com>
+
+_name=cbor2
+pkgname=python-cbor2
+pkgver=5.7.0
+pkgrel=1
+pkgdesc="Pure Python CBOR (de)serializer with extensive tag support"
+arch=(x86_64 powerpc powerpc64 powerpc64le espresso)
+url="https://github.com/agronholm/cbor2"
+license=(MIT)
+depends=(
+  glibc
+  python
+)
+makedepends=(
+  python-build
+  python-installer
+  python-setuptools-scm
+  python-toml
+  python-wheel
+)
+checkdepends=(
+  python-hypothesis
+  python-pytest
+)
+source=($url/archive/refs/tags/$pkgver/$_name-$pkgver.tar.gz)
+sha512sums=('50c8021534bfd6a6089dd239ac07aff5ca8dcd77ce22ed3f813883a0dd722ad81e789f9cce25ff1e0850cd392601f74b5855c49e0d239b338c57b4f34510739e')
+b2sums=('92ac92e0c3b417145ddccdb5587bca8ff6a46c42a509cb6c88bcf7dd88643bffaace2bc02fae9c72e94b5fd811903041c1c3321ac653fae7c1668342b52392a9')
+
+build() {
+  cd $_name-$pkgver
+  SETUPTOOLS_SCM_PRETEND_VERSION=$pkgver python -m build -wn
+}
+
+check() {
+  cd $_name-$pkgver
+  export PYTHONPATH="build:${PYTHONPATH}"
+  pytest -v -c /dev/null tests
+}
+
+package() {
+  cd $_name-$pkgver
+  python -m installer -d "$pkgdir" dist/*.whl
+  install -vDm 644 README.rst -t "$pkgdir/usr/share/doc/$pkgname/"
+  install -vDm 644 LICENSE.txt -t "$pkgdir/usr/share/licenses/$pkgname/"
+}
