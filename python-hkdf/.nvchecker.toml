@@ -1,0 +1,3 @@
+[python-hkdf]
+source = "pypi"
+pypi = "hkdf"
