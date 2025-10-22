@@ -1,0 +1,50 @@
+# Maintainer: Alexander Epaneshnikov <alex19ep@archlinux.org>
+# Contributor: Storm Dragon <stormdragon2976@gmail.com>
+
+pkgname=python-txtorcon
+pkgver=24.8.0
+pkgrel=1
+pkgdesc='A Twisted-based Python asynchronous controller library for Tor'
+arch=('any')
+url='https://txtorcon.readthedocs.org/'
+license=('MIT')
+depends=(
+	'python'
+	'python-automat'
+	'python-cryptography'
+	'python-idna'  # via twisted[tls]
+	'python-pyopenssl'  # via twisted[tls]
+	'python-service-identity'  # via twisted[tls]
+	'python-geoip'
+	'python-twisted'
+	'python-zope-interface'
+)
+makedepends=(
+	'python-build'
+	'git'
+	'python-installer'
+	'python-setuptools'
+	'python-wheel'
+)
+#checkdepends=('python-cryptography' 'python-pyopenssl' 'lsof')
+source=("${pkgname#python-}::git+https://github.com/meejah/txtorcon.git#tag=v$pkgver")
+sha512sums=('8103ec01c72361b09116b495c3b086ed37831e4fc15e619f882100bd4e547eca7711b35496b06d787a4a76acc561dd53c220a2272b81ac906c3f77ddff004ba2')
+validpgpkeys=('9D5A2BD5688ECB889DEBCD3FC2602803128069A7')
+
+build() {
+	cd "${pkgname#python-}"
+	python -m build --wheel --no-isolation
+}
+
+# tests fail on PPC due to unrelated issues
+#check() {
+#	cd "${pkgname#python-}"
+#	PYTHONPATH=. trial test
+#}
+
+package() {
+	cd "${pkgname#python-}"
+	python -m installer --destdir="$pkgdir" dist/*.whl
+	rm -r "${pkgdir}/usr/share/txtorcon"
+	install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

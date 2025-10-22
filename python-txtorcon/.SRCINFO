@@ -1,0 +1,29 @@
+pkgbase = python-txtorcon
+	pkgdesc = A Twisted-based Python asynchronous controller library for Tor
+	pkgver = 24.8.0
+	pkgrel = 1
+	url = https://txtorcon.readthedocs.org/
+	arch = any
+	license = MIT
+	checkdepends = python-cryptography
+	checkdepends = python-pyopenssl
+	checkdepends = lsof
+	makedepends = python-build
+	makedepends = git
+	makedepends = python-installer
+	makedepends = python-setuptools
+	makedepends = python-wheel
+	depends = python
+	depends = python-automat
+	depends = python-cryptography
+	depends = python-idna
+	depends = python-pyopenssl
+	depends = python-service-identity
+	depends = python-geoip
+	depends = python-twisted
+	depends = python-zope-interface
+	source = txtorcon::git+https://github.com/meejah/txtorcon.git#tag=v24.8.0
+	validpgpkeys = 9D5A2BD5688ECB889DEBCD3FC2602803128069A7
+	sha512sums = 8103ec01c72361b09116b495c3b086ed37831e4fc15e619f882100bd4e547eca7711b35496b06d787a4a76acc561dd53c220a2272b81ac906c3f77ddff004ba2
+
+pkgname = python-txtorcon
