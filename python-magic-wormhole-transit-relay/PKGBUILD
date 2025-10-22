@@ -1,0 +1,43 @@
+# Maintainer: Alexander Epaneshnikov <alex19ep@archlinux.org>
+# Maintainer: Caleb Maclennan <caleb@alerque.com>
+
+pkgname=python-magic-wormhole-transit-relay
+pkgver=0.4.0
+pkgrel=2
+pkgdesc="transit Relay server for Magic-Wormhole"
+arch=(any)
+url="https://github.com/magic-wormhole/magic-wormhole-transit-relay"
+license=(MIT)
+depends=(python-autobahn
+         python-twisted)
+makedepends=(python-{build,installer,wheel}
+             python-setuptools
+             python-versioneer)
+#checkdepends=(python-pytest)
+source=(${pkgname}-${pkgver}.tar.gz::"https://github.com/magic-wormhole/magic-wormhole-transit-relay/archive/refs/tags/${pkgver}.tar.gz")
+sha512sums=('ee0f40460277abc1ad550e070d8b70329da8c1311852f7a2eaaef036cfee7fcf018be7e6bad6f416392a602326ac436c33039d577af8cee2cfb09736749e956d')
+b2sums=('16415af2b9927cf2717c1c38be4b498d666db271c4e7b907bcf0fae9d5d100ee341358d2f04e72ba1a7f930dbc4fd9e797b20d6915d21955ef6963520d9b406a')
+
+prepare() {
+	cd "${pkgname#python-}-$pkgver"
+	# De-vendor old versioneer copy, incompatible with 3.12
+	rm versioneer.py
+}
+
+build() {
+	cd "${pkgname#python-}-${pkgver}"
+	python -m build -wn
+}
+
+#check() {
+#	cd "${pkgname#python-}-${pkgver}"
+#	export PYTHONPATH='src/wormhole_transit_relay'
+#	pytest --deselect src/wormhole_transit_relay/test/test_backpressure.py
+#}
+
+package() {
+	cd "${pkgname#python-}-${pkgver}"
+	python -m installer -d "$pkgdir" dist/*.whl
+	install -Dm0644 -t "$pkgdir/usr/share/licenses/$pkgname/" LICENSE
+	install -Dm0644 -t "$pkgdir/usr/share/doc/$pkgname" docs/*.md
+}

@@ -1,0 +1,4 @@
+[python-magic-wormhole-transit-relay]
+source = "github"
+github = "magic-wormhole/magic-wormhole-transit-relay"
+use_latest_tag = true
