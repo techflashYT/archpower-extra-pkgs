@@ -1,0 +1,55 @@
+# Maintainer: Chih-Hsuan Yen <yan12125@archlinux.org>
+
+pkgname=python-ubjson
+pkgver=0.16.1
+pkgrel=8
+pkgdesc='Universal Binary JSON draft-12 serializer for Python'
+arch=(x86_64 powerpc powerpc64 powerpc64le espresso)
+url='https://github.com/Iotic-Labs/py-ubjson'
+# See https://github.com/Iotic-Labs/py-ubjson/blob/v0.16.1/NOTICE for third-party files
+license=(
+  # Most files
+  # https://github.com/Iotic-Labs/py-ubjson/blob/v0.16.1/setup.py#L85
+  'Apache-2.0'
+  # ubjson/compat.py, which is derived from six.py
+  'MIT'
+  # src/python_funcs.c, which is extracted from some files in CPython
+  'PSF-2.0'
+)
+makedepends=(python-build python-installer python-setuptools python-wheel)
+depends=(python)
+source=("https://files.pythonhosted.org/packages/source/p/py-ubjson/py-ubjson-$pkgver.tar.gz"
+        "py-ubjson-$pkgver.tar.gz.asc"
+        "py312.diff")
+sha256sums=('b9bfb8695a1c7e3632e800fb83c943bf67ed45ddd87cd0344851610c69a5a482'
+            'SKIP'
+            '9309c5337ebdcb206deedf2dc46d98f4b32df3fda414c4bd98f15c85c8bcd3f1')
+validpgpkeys=(
+  'A262040D27F5F4700D097A02CF651F44EF65072E'  # Iotic Labs Ltd (Software release signing key) <info@iotic-labs.com>
+)
+
+prepare() {
+  cd py-ubjson-$pkgver
+  # Part of https://github.com/Iotic-Labs/py-ubjson/pull/19 (unmerged)
+  patch -Np1 -i ../py312.diff
+}
+
+build() {
+  cd py-ubjson-$pkgver
+  python -m build --wheel --no-isolation
+
+  awk '/Benjamin Peterson/{flag=1} /Python v2\.7/ {flag=0} flag' ubjson/compat.py > LICENSE.MIT
+}
+
+check() {
+  cd py-ubjson-$pkgver
+  pyver=$(python -c "import sys; print('{}{}'.format(*sys.version_info[:2]))")
+  PYTHONPATH="$PWD/build/lib.linux-$CARCH-cpython-$pyver" python -m unittest discover -v test
+}
+
+package() {
+  cd py-ubjson-$pkgver
+  python -m installer --destdir="$pkgdir" dist/*.whl
+
+  install -Dm644 LICENSE.MIT -t "$pkgdir"/usr/share/licenses/$pkgname
+}

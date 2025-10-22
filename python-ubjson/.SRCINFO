@@ -1,0 +1,27 @@
+pkgbase = python-ubjson
+	pkgdesc = Universal Binary JSON draft-12 serializer for Python
+	pkgver = 0.16.1
+	pkgrel = 8
+	url = https://github.com/Iotic-Labs/py-ubjson
+	arch = x86_64
+	arch = powerpc
+	arch = powerpc64
+	arch = powerpc64le
+	arch = espresso
+	license = Apache-2.0
+	license = MIT
+	license = PSF-2.0
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-setuptools
+	makedepends = python-wheel
+	depends = python
+	source = https://files.pythonhosted.org/packages/source/p/py-ubjson/py-ubjson-0.16.1.tar.gz
+	source = py-ubjson-0.16.1.tar.gz.asc
+	source = py312.diff
+	validpgpkeys = A262040D27F5F4700D097A02CF651F44EF65072E
+	sha256sums = b9bfb8695a1c7e3632e800fb83c943bf67ed45ddd87cd0344851610c69a5a482
+	sha256sums = SKIP
+	sha256sums = 9309c5337ebdcb206deedf2dc46d98f4b32df3fda414c4bd98f15c85c8bcd3f1
+
+pkgname = python-ubjson
