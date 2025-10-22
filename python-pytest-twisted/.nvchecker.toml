@@ -1,0 +1,4 @@
+[python-pytest-twisted]
+source = "git"
+git = "https://github.com/pytest-dev/pytest-twisted.git"
+prefix = "v"

@@ -1,0 +1,17 @@
+pkgbase = python-pytest-twisted
+	pkgdesc = A twisted plugin for py.test
+	pkgver = 1.14.3
+	pkgrel = 2
+	url = https://github.com/pytest-dev/pytest-twisted
+	arch = any
+	license = BSD
+	makedepends = git
+	makedepends = python-setuptools
+	depends = python-pytest
+	depends = python-greenlet
+	depends = python-decorator
+	depends = python-twisted
+	source = git+https://github.com/pytest-dev/pytest-twisted.git#tag=v1.14.3
+	sha512sums = afbc985721bb7d7b063c1181c0d295d930c0f6eb2a66434eee4980755c77657456bd9817bc42e29230341eb51cb59c0bd54f39484d4e95ff810cb3eaf5d09a61
+
+pkgname = python-pytest-twisted
