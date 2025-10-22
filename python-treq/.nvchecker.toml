@@ -1,0 +1,3 @@
+[python-treq]
+source = "pypi"
+pypi = "treq"

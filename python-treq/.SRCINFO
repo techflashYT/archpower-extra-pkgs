@@ -1,0 +1,27 @@
+pkgbase = python-treq
+	pkgdesc = A requests-like API built on top of twisted.web's Agent
+	pkgver = 24.9.1
+	pkgrel = 2
+	url = https://github.com/twisted/treq
+	arch = any
+	license = MIT
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-setuptools
+	makedepends = python-wheel
+	makedepends = httpbin
+	depends = python
+	depends = python-incremental
+	depends = python-requests
+	depends = python-hyperlink
+	depends = python-pyopenssl
+	depends = python-service-identity
+	depends = python-idna
+	depends = python-twisted
+	depends = python-attrs
+	depends = python-typing_extensions
+	depends = python-zope-interface
+	source = https://github.com/twisted/treq/archive/treq-24.9.1/python-treq-24.9.1.tar.gz
+	sha512sums = 924515da514332cf9843b23a518cf0fe0215f5c42f87494b6132bf69f3c3d6a0a8c482110d022fa91c780c845b757b9fa367d606bda1ed0e4ec20f814183fa5d
+
+pkgname = python-treq
