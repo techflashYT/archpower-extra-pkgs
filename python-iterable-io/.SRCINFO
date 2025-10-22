@@ -1,0 +1,17 @@
+pkgbase = python-iterable-io
+	pkgdesc = Adapt generators and other iterables to a file-like interface
+	pkgver = 1.0.0
+	pkgrel = 4
+	url = https://github.com/pR0Ps/iterable-io
+	arch = any
+	license = LGPL-3.0-only
+	checkdepends = python-pytest
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-wheel
+	makedepends = python-setuptools
+	depends = python
+	source = https://files.pythonhosted.org/packages/source/i/iterable-io/iterable-io-1.0.0.tar.gz
+	sha256sums = fb9e1b739587a9ba0d5c60a3e1eb71246761583bc9f18b3c35bb112b44b18c3c
+
+pkgname = python-iterable-io
