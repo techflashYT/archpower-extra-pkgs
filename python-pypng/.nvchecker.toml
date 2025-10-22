@@ -1,0 +1,5 @@
+[python-pypng]
+source = "git"
+git = "https://gitlab.com/drj11/pypng.git"
+prefix = "pypng-"
+exclude_regex = "0.0.14"
