@@ -1,0 +1,5 @@
+[python-zipstream-ng]
+source = "github"
+github = "pR0Ps/zipstream-ng"
+prefix = "v"
+use_max_tag = true

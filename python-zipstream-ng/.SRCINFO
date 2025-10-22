@@ -1,0 +1,18 @@
+pkgbase = python-zipstream-ng
+	pkgdesc = A modern and easy to use streamable zip file generator
+	pkgver = 1.9.0
+	pkgrel = 1
+	url = https://github.com/pR0Ps/zipstream-ng
+	arch = any
+	license = LGPL-3.0-only
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-wheel
+	makedepends = python-setuptools
+	depends = python
+	provides = python-zipstream=1.9.0
+	conflicts = python-zipstream
+	source = https://github.com/pR0Ps/zipstream-ng/archive/v1.9.0/zipstream-ng-1.9.0.tar.gz
+	sha256sums = ea566bd08feeb16c9045a1c197a313e2ddcde8511e5866a556aeada34ae25bad
+
+pkgname = python-zipstream-ng
