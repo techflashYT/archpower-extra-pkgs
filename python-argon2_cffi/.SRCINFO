@@ -1,0 +1,18 @@
+pkgbase = python-argon2_cffi
+	pkgdesc = CFFI-based Argon2 Bindings for Python
+	pkgver = 23.1.0
+	pkgrel = 3
+	url = https://github.com/hynek/argon2_cffi
+	arch = any
+	license = MIT
+	makedepends = git
+	makedepends = python-hatch-vcs
+	makedepends = python-hatch-fancy-pypi-readme
+	makedepends = python-build
+	makedepends = python-installer
+	depends = python-argon2-cffi-bindings
+	source = git+https://github.com/hynek/argon2_cffi?signed#tag=23.1.0
+	validpgpkeys = C2A04F86ACE28ADCF817DBB7AE2536227F69F181
+	sha256sums = b5cbd90c2f4782604e5e2571f8aaf6818d7466460fe8d63cc2db8ddbc06dd34d
+
+pkgname = python-argon2_cffi
