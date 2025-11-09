@@ -1,7 +1,7 @@
 pkgbase = mosquitto
 	pkgdesc = An Open Source MQTT Broker
 	pkgver = 2.0.22
-	pkgrel = 2
+	pkgrel = 3
 	url = https://mosquitto.org/
 	arch = x86_64
 	arch = powerpc
