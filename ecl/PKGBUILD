@@ -1,0 +1,56 @@
+# Contributor: John Proctor <jproctor@prium.net>
+# Maintainer: juergen <juergen@archlinux.org>
+
+pkgname=ecl
+pkgver=24.5.10
+pkgrel=3
+pkgdesc="Embeddable Common Lisp"
+arch=(x86_64 powerpc powerpc64 powerpc64le espresso)
+url="https://common-lisp.net/project/ecl/"
+license=('LGPL')
+depends=('bash' 'gmp' 'libffi')
+makedepends=('texinfo')
+provides=('common-lisp' 'cl-asdf')
+options=('!makeflags')
+source=("https://common-lisp.net/project/ecl/static/files/release/${pkgname}-${pkgver}.tgz"
+        "https://gitlab.com/embeddable-common-lisp/ecl/-/commit/5b4e9c4bbd7cce4a678eecd493e56c495490e8b5.patch"
+        "https://gitlab.com/embeddable-common-lisp/ecl/-/commit/5ec9e02f6db9694dcdef7574036f1e320d64a8af.patch"
+        "https://gitlab.com/embeddable-common-lisp/ecl/-/commit/1aec8f741f69fd736f020b7fe4d3afc33e60ae6a.patch")
+sha256sums=('e4ea65bb1861e0e495386bfa8bc673bd014e96d3cf9d91e9038f91435cbe622b'
+            '6926dfba7c1b7ef2b55f1a885a60cb9c48b95de4557ff4e60b6102ac10676bb0'
+            '8118ce439047fc78f3ea07aef80a5e13bd5d2a05b3b19445c98d6ecd59e4adae'
+            'e2966a928424e6d1f156212d571b7e0887faf87d72ea20780b681757bb425b37')
+
+prepare() {
+  cd $pkgname-$pkgver
+  # cfun_dispatch.d: remove unneeded variadic dispatch function
+  patch -Np1 -i ../5b4e9c4bbd7cce4a678eecd493e56c495490e8b5.patch
+  # apply.d: fix deprecation warnings for function calls without prototypes 
+  patch -Np1 -i ../5ec9e02f6db9694dcdef7574036f1e320d64a8af.patch
+  # port to C23 standard
+  patch -Np1 -i ../1aec8f741f69fd736f020b7fe4d3afc33e60ae6a.patch
+}
+
+build() {
+  cd $pkgname-$pkgver
+  sed -i 's|-Wl,--rpath,~A|-Wl,--rpath,/usr/lib/ecl|' src/configure
+  CFLAGS+=" -fcommon -ffat-lto-objects -std=gnu17" \
+  ./configure \
+    --build=$CHOST \
+    --prefix=/usr \
+    --with-tcp \
+    --with-serve-event \
+    --with-clos-streams \
+    --with-system-gmp \
+    --without-x \
+    --without-clx \
+    --enable-threads \
+    --enable-shared \
+    --enable-boehm=included \
+
+  make
+}
+
+package() {
+  make -C $pkgname-$pkgver DESTDIR="$pkgdir" install
+}
