@@ -4,11 +4,17 @@ pkgbase = ecl
 	pkgrel = 1
 	url = https://common-lisp.net/project/ecl/
 	arch = x86_64
+	arch = powerpc
+	arch = powerpc64
+	arch = powerpc64le
+	arch = espresso
 	license = LGPL-2.1-or-later
 	makedepends = texinfo
 	depends = bash
+	depends = glibc
 	depends = gmp
 	depends = libffi
+	depends = libgcc
 	provides = common-lisp
 	provides = cl-asdf
 	options = !makeflags
@@ -17,4 +23,3 @@ pkgbase = ecl
 	b2sums = 6cb8703e37eb2f24eaf375dbb77bb9a9a2b526de640441a91b459bd4ca9bfc589cfc6ce180b6040157c86db338ae8e9f16c01ab355fcb2764bb8afd1742f9ac5
 
 pkgname = ecl
-
