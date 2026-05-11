@@ -1,0 +1,20 @@
+pkgbase = ecl
+	pkgdesc = Embeddable Common Lisp
+	pkgver = 26.3.27
+	pkgrel = 1
+	url = https://common-lisp.net/project/ecl/
+	arch = x86_64
+	license = LGPL-2.1-or-later
+	makedepends = texinfo
+	depends = bash
+	depends = gmp
+	depends = libffi
+	provides = common-lisp
+	provides = cl-asdf
+	options = !makeflags
+	source = https://common-lisp.net/project/ecl/static/files/release/ecl-26.3.27.tgz
+	sha512sums = a6a8a40f63b44229fb84239cf5f1048e0a99bc36ec3fc1925409ad344884997de125ac1954cf0fb715529efb602649735e739f73827a834fb117512cf2e7879d
+	b2sums = 6cb8703e37eb2f24eaf375dbb77bb9a9a2b526de640441a91b459bd4ca9bfc589cfc6ce180b6040157c86db338ae8e9f16c01ab355fcb2764bb8afd1742f9ac5
+
+pkgname = ecl
+

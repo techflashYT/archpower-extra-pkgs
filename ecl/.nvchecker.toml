@@ -1,0 +1,3 @@
+[ecl]
+source = 'git'
+git = 'https://gitlab.com/embeddable-common-lisp/ecl/'
