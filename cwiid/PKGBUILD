@@ -4,7 +4,7 @@
 # Adapted from Andrea's cwiid-git PKGBUILD from the AUR.
 
 pkgname=cwiid
-pkgver=0.7.01
+pkgver=0.7.02
 pkgrel=1
 pkgdesc="Driver and utility tools for Nintendo Wii Remotes"
 arch=(i486 i686 pentium4 x86_64 armv7h aarch64 powerpc powerpc64 powerpc64le espresso)
@@ -16,7 +16,7 @@ makedepends=('git' 'make')
 conflicts=('cwiid' 'cwiid-svn' 'cwiid-git')
 provides=('cwiid' 'cwiid-svn' 'cwiid-git')
 install=cwiid.install
-_commit=0.7.01
+_commit=0.7.02
 source=("$url/archive/$_commit.tar.gz")
 sha256sums=(
         "SKIP"
