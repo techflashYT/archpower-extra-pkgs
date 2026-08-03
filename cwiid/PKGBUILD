@@ -1,0 +1,37 @@
+# Maintainer: Techflash <officialTechflashYT@gmail.com>
+# Contributor:Andrea Tarocchi <valdar@email.it> 
+
+# Adapted from Andrea's cwiid-git PKGBUILD from the AUR.
+
+pkgname=cwiid
+pkgver=0.7.01
+pkgrel=1
+pkgdesc="Driver and utility tools for Nintendo Wii Remotes"
+arch=(i486 i686 pentium4 x86_64 armv7h aarch64 powerpc powerpc64 powerpc64le espresso)
+url="http://github.com/Wii-Linux/cwiid"
+license=('GPL')
+
+depends=('bluez-libs' 'gtk2' 'python' 'python-setuptools')
+makedepends=('git' 'make')
+conflicts=('cwiid' 'cwiid-svn' 'cwiid-git')
+provides=('cwiid' 'cwiid-svn' 'cwiid-git')
+install=cwiid.install
+_commit=0.7.01
+source=("$url/archive/$_commit.tar.gz")
+sha256sums=(
+        "SKIP"
+)
+
+build() {
+	cd "$srcdir/cwiid-$_commit"
+	aclocal
+	autoreconf
+
+	./configure --prefix=/usr --sysconfdir=/etc --disable-ldconfig
+	make
+}
+
+package() {  
+	cd "$srcdir/cwiid-$_commit"
+	make DESTDIR="${pkgdir}" install 
+}
