@@ -1,0 +1,45 @@
+# Maintainer: Kai <kaibbusinessinq@gmail.com>
+# Contributor: David Manouchehri <d@32t.ca>
+
+pkgname=xf86-input-xwiimote
+_gitauthor=dvdhrm
+pkgver=0.5.r8.g827323e
+pkgrel=1
+pkgdesc='X.Org Nintendo Wii Remote input driver'
+arch=('i686' 'x86_64' 'powerpc' 'powerpc64' 'powerpc64le' 'espresso')
+url="https://github.com/$_gitauthor/$pkgname"
+license=('MIT')
+depends=('xwiimote' 'udev')
+makedepends=('xorg-server-devel>=1.10.99.902')
+conflicts=('xorg-server<1.10.99.902' 'xf86-input-xwiimote')
+providers=('xf86-input-xwiimote')
+options=(!libtool)
+_commit=827323e1d625418570aeffc80a32757cb5f2aa96
+source=("${url}/archive/${_commit}.tar.gz"
+	"0001-motionsource-ir-default.patch")
+sha256sums=('4b906d45d0e5df1348d0ef8e764157818272fa0dde4185730522b0a91f25a218'
+            'f3a10aa914d4e5f7c881f435086e501237058b6130be60b73076a8cbe7c14967')
+
+prepare() {
+	cd "$pkgname-$_commit"
+	patch -Np1 < ../0001-motionsource-ir-default.patch
+	NOCONFIGURE=1 ./autogen.sh
+}
+
+build() {
+	cd "$pkgname-$_commit"
+	./configure --prefix=/usr --with-doxygen=no
+	make
+}
+
+package() {
+	cd "$pkgname-$_commit"
+	install -m644 -D COPYING "$pkgdir/usr/share/licenses/$pkgname/COPYING"
+	install -m644 -D "60-xorg-xwiimote.conf" "$pkgdir/etc/X11/xorg.conf.d/60-xwiimote.conf"
+	make DESTDIR="$pkgdir/" install
+}
+
+apb_extra_repos=(
+	"extra-any::https://repo.wii-linux.org/arch/extra/any"
+	"extra::https://repo.wii-linux.org/arch/extra/$arch"
+)

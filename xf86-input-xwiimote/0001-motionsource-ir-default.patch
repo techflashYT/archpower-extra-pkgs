@@ -1,0 +1,12 @@
+diff --git a/60-xorg-xwiimote.conf b/60-xorg-xwiimote.conf
+index 17de4a0..c737552 100644
+--- a/60-xorg-xwiimote.conf
++++ b/60-xorg-xwiimote.conf
+@@ -10,6 +10,7 @@ Section "InputClass"
+ 	MatchProduct "Nintendo Wii Remote"
+ 	MatchDevicePath "/dev/input/event*"
+ 	Option "Ignore" "off"
++	Option "MotionSource" "ir"
+ 	Driver "xwiimote"
+ EndSection
+ 
