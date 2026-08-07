@@ -1,6 +1,6 @@
 pkgbase = xwiimote
 	pkgdesc = Open Source Nintendo Wii Remote Linux Device Driver
-	pkgver = 2
+	pkgver = 2.r29.g4df713d
 	pkgrel = 2
 	url = https://github.com/xwiimote/xwiimote
 	arch = x86_64
@@ -13,7 +13,7 @@ pkgbase = xwiimote
 	depends = libsystemd
 	conflicts = xwiimote-git
 	backup = etc/X11/xorg.conf.d/50-fix-xwiimote.conf
-	source = https://github.com/xwiimote/xwiimote/archive/xwiimote-2.tar.gz
-	sha256sums = 2e893e2899ec6c688df60092b6d88c911b45bc6ce9b4850030d72944873975cb
+	source = https://github.com/xwiimote/xwiimote/archive/4df713d9037d814cc0c64197f69e5c78d55caaf1.tar.gz
+	sha256sums = dc4713949a9b2bb48bd79a5c87c0219d7b20f7933c62da7635bad45267ae9a13.1s
 
 pkgname = xwiimote
