@@ -2,7 +2,7 @@
 
 pkgname=thefuck
 pkgver=3.32
-pkgrel=11
+pkgrel=13
 pkgdesc="Magnificent app which corrects your previous console command"
 arch=('any')
 url="https://github.com/nvbn/thefuck"
@@ -17,12 +17,14 @@ source=(
   $pkgname-3.32-remove_imp.patch
   https://github.com/nvbn/thefuck/commit/dd26fb91a0fdec42fc1990bb91eab21e2c44a0a8.patch
   https://github.com/nvbn/thefuck/commit/59500dd5ba08fd4dbefe43f0300336f5c69e37fb.patch
+  $pkgname-3.32-remove-pkg_resources.patch
 )
 sha512sums=('961b9b6dc374cc0b854698455f688cf110adb21cfebd4cb645eb5f1ce11c14de6699bb4d40de86a5f9461273cbfc2eea318a9d437f803dc578dd431966cf26c1'
             'f3dcbfae6a8061d44dd47196ff00e4d5ae065e938ce4c3cf009f107f195e0ea3bcbac2bfb9a2e86ad471c14c9b8991e61490884631291aee41d6a5ad257a4d0a'
             '0adbde0af4ddbeb9f109da7ba7fe616c04ce1a5ed9f78f7eb14b6f0e6aa68da6d615794907e2ac88c5f162a9cabd9218bc2dc7e2cdf91558363d546507b21d68'
             '63dfa603f674e94e795fe5771c9fcd3314a74724e7368fb787059ae7a5af4e89fa7b44b67e287fb95e8c6798fe1ae49a0c4bcf0ec9741a51aecf3b9387e7ac67'
-            'df570dd885f8e9599fe586342bcdc1c56426349c93430593d7bf15edbafe731ae0dd3d40c4f451ac2ea933e18e39d538979ab230b469d3b949b7c95bc6f47e45')
+            'df570dd885f8e9599fe586342bcdc1c56426349c93430593d7bf15edbafe731ae0dd3d40c4f451ac2ea933e18e39d538979ab230b469d3b949b7c95bc6f47e45'
+            'c308753434ae6c1b7ae7905c86bc7b252d0d12cc66c30ae9ba2b00a091c21be92c6831ea8d0ee7e87f908f698f5b01b6172eda62ebac63426fa66d0dd5b9d1a2')
 
 prepare() {
   # remove the use of python-mock: https://github.com/nvbn/thefuck/pull/1437
@@ -33,6 +35,7 @@ prepare() {
   patch -Np1 -d $pkgname-$pkgver -i ../dd26fb91a0fdec42fc1990bb91eab21e2c44a0a8.patch
   # pytest v8.x compatibility: https://github.com/nvbn/thefuck/pull/1474
   patch -Np1 -d $pkgname-$pkgver -i ../59500dd5ba08fd4dbefe43f0300336f5c69e37fb.patch
+  patch -Np1 -d $pkgname-$pkgver -i ../$pkgname-3.32-remove-pkg_resources.patch
 }
 
 build() {
@@ -42,11 +45,39 @@ build() {
 
 #check() {
 #  cd thefuck-$pkgver
-
-  # Hack distribution test by installing it and set PYTHONPATH afterwards
+#
+#  TODO:
+#________________________ ERROR collecting tests/shells _________________________
+#/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+#    return _bootstrap._gcd_import(name[level:], package, level)
+#           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#<frozen importlib._bootstrap>:1406: in _gcd_import
+#    ???
+#<frozen importlib._bootstrap>:1371: in _find_and_load
+#    ???
+#<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked
+#    ???
+#<frozen importlib._bootstrap>:938: in _load_unlocked
+#    ???
+#/usr/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:197: in exec_module
+#    exec(co, module.__dict__)
+#tests/shells/conftest.py:14: in <module>
+#    @pytest.fixture
+#     ^^^^^^^^^^^^^^
+#/usr/lib/python3.14/site-packages/_pytest/fixtures.py:1399: in fixture
+#    return fixture_marker(fixture_function)
+#           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#/usr/lib/python3.14/site-packages/_pytest/fixtures.py:1239: in __call__
+#    warnings.warn(MARKED_FIXTURE, stacklevel=2)
+#E   pytest.PytestRemovedIn9Warning: Marks applied to fixtures have no effect
+#E   See docs: https://docs.pytest.org/en/stable/deprecations.html#applying-a-mark-to-a-fixture-function
+#=========================== short test summary info ============================
+#  https://docs.pytest.org/en/stable/deprecations.html#applying-a-mark-to-a-fixture-function
+#
+#  # Hack distribution test by installing it and set PYTHONPATH afterwards
 #  python -m installer --destdir="$PWD/tmp_install" dist/*.whl
-
-  # Hack $HOME as it's / in the chroot and not writable
+#
+#  # Hack $HOME as it's / in the chroot and not writable
 #  cp tests/test_conf.py "$srcdir/test_conf.py.bak"
 #  sed -i "s|data = {}|data = {'HOME': '$srcdir'}|" tests/test_conf.py
 #  local site_packages=$(python -c "import site; print(site.getsitepackages()[0])")

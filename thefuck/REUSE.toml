@@ -25,6 +25,7 @@ SPDX-License-Identifier = "0BSD"
 path = [
     "thefuck-3.32-remove_imp.patch",
     "thefuck-3.32-remove_mock.patch",
+    "thefuck-3.32-remove-pkg_resources.patch",
 ]
 SPDX-FileCopyrightText = "thefuck contributors"
 SPDX-License-Identifier = "MIT"
