@@ -1,0 +1,5 @@
+[mbedtls3]
+source = "git"
+git = "https://github.com/Mbed-TLS/mbedtls.git"
+prefix = "mbedtls-"
+include_regex = "mbedtls-3.*"

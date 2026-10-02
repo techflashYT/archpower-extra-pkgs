@@ -1,0 +1,28 @@
+pkgbase = mbedtls3
+	pkgdesc = An open source, portable, easy to use, readable and flexible TLS library
+	pkgver = 3.6.7
+	pkgrel = 1
+	url = https://tls.mbed.org
+	arch = x86_64
+	arch = powerpc
+	arch = powerpc64
+	arch = powerpc64le
+	arch = espresso
+	license = Apache-2.0
+	checkdepends = python
+	makedepends = cmake
+	makedepends = git
+	makedepends = ninja
+	makedepends = python
+	depends = glibc
+	depends = sh
+	provides = libmbedcrypto.so
+	provides = libmbedtls.so
+	provides = libmbedx509.so
+	options = staticlibs
+	source = git+https://github.com/Mbed-TLS/mbedtls.git#tag=mbedtls-3.6.7
+	source = git+https://github.com/Mbed-TLS/mbedtls-framework.git
+	b2sums = 956c7be3afb1db2c699f430810e29de1c80d906371243de6fab45cd7b6042ed24af7bb80c975483c76215c92f9eca1ea548d6434c0068c5f522abfebf45a684e
+	b2sums = SKIP
+
+pkgname = mbedtls3

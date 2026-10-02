@@ -1,0 +1,84 @@
+# Maintainer: Maxime Gauduin <alucryd@archlinux.org>
+# Contributor: Kyle Keen <keenerd@gmail.com>
+# Contributor: Mihai Militaru <mihai militaru at xmpp dot ro>
+# Contributor: carstene1ns <arch carsten-teibes.de>
+
+pkgname=mbedtls3
+pkgver=3.6.7
+pkgrel=1
+pkgdesc='An open source, portable, easy to use, readable and flexible TLS library'
+arch=(x86_64 powerpc powerpc64 powerpc64le espresso)
+url=https://tls.mbed.org
+license=(Apache-2.0)
+depends=(
+  glibc
+  sh
+)
+checkdepends=(python)
+makedepends=(
+  cmake
+  git
+  ninja
+  python
+)
+provides=(
+  libmbedcrypto.so
+  libmbedtls.so
+  libmbedx509.so
+)
+options=(staticlibs)
+source=(
+  git+https://github.com/Mbed-TLS/mbedtls.git#tag=mbedtls-${pkgver}
+  git+https://github.com/Mbed-TLS/mbedtls-framework.git
+)
+b2sums=('956c7be3afb1db2c699f430810e29de1c80d906371243de6fab45cd7b6042ed24af7bb80c975483c76215c92f9eca1ea548d6434c0068c5f522abfebf45a684e'
+        'SKIP')
+
+prepare() {
+  cd mbedtls
+  git submodule init framework
+  git config submodule.framework.url "${srcdir}"/mbedtls-framework
+  git -c protocol.file.allow=always submodule update framework
+  scripts/config.py set MBEDTLS_HAVE_SSE2
+  scripts/config.py set MBEDTLS_THREADING_C
+  scripts/config.py set MBEDTLS_THREADING_PTHREAD
+}
+
+build() {
+  export CFLAGS+=' -ffat-lto-objects'
+  cmake -S mbedtls -B build -G Ninja \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_INCLUDEDIR=include/mbedtls3 \
+    -DCMAKE_INSTALL_LIBDIR=lib/mbedtls3 \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DUSE_SHARED_MBEDTLS_LIBRARY=ON \
+    -DUSE_STATIC_MBEDTLS_LIBRARY=ON \
+    -Wno-dev
+  cmake --build build
+}
+
+check() {
+  LD_LIBRARY_PATH="${srcdir}"/build/library ctest --test-dir build
+}
+
+package() {
+  DESTDIR="${pkgdir}" cmake --install build
+
+  # rename generic utils
+  local _prog _baseprog
+  for _prog in "${pkgdir}"/usr/bin/*; do
+    _baseprog=$(basename "$_prog")
+    mv -v "$_prog" "${_prog//$_baseprog/mbedtls3_$_baseprog}"
+  done
+
+  # fixup static lib permissions
+  chmod 644 "${pkgdir}"/usr/lib/mbedtls3/*.a
+
+  # create symlinks for shared libs
+  for _lib in "${pkgdir}"/usr/lib/mbedtls3/lib*.so.*; do
+    ln -sf mbedtls3/"$(basename "$_lib")" "${pkgdir}/usr/lib/$(basename "$_lib")"
+  done
+}
+
+# vim: ts=2 sw=2 et:
