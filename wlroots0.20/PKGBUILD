@@ -1,0 +1,38 @@
+# Maintainer: Robin Candau <antiz@archlinux.org>
+
+pkgname=wlroots0.20
+_pkgname=wlroots
+pkgver=0.20.2
+pkgrel=1
+pkgdesc="Modular Wayland compositor library"
+url="https://gitlab.freedesktop.org/wlroots/wlroots"
+license=('MIT')
+arch=('x86_64' 'powerpc' 'powerpc64' 'powerpc64le' 'espresso')
+depends=('glibc' 'libdisplay-info.so' 'libdrm' 'libglvnd' 'libinput' 'liblcms2.so' 'libliftoff.so' 'libpixman-1.so'
+         'libseat.so' 'libudev.so' 'libvulkan.so' 'libwayland-client.so' 'libwayland-server.so' 'libxcb' 'libxkbcommon.so'
+         'wayland-protocols' 'opengl-driver' 'xcb-util-errors' 'xcb-util-renderutil' 'xcb-util-wm')
+makedepends=('git' 'glslang' 'meson' 'ninja' 'systemd' 'vulkan-headers' 'xorg-xwayland')
+optdepends=('xorg-xwayland: Xwayland support'
+            'vulkan-validation-layers: validation layers for the experimental vulkan renderer backend')
+provides=("libwlroots-${pkgver%.*}.so")
+source=("${pkgname}::git+${url}.git#tag=${pkgver}?signed")
+sha256sums=('6c8595da579a8df74bc307294c2485e90f5379b84390381f500da33ff3f276d2')
+validpgpkeys=('34FF9526CFEF0E97A340E2E40FDE7BE0E88F5E48'  # Simon Ser
+              '9DDA3B9FA5D58DD5392C78E652CB6609B22DA89A'  # Drew DeVault
+              '4100929B33EEB0FD1DB852797BC79407090047CA') # Sway signing key)
+
+build() {
+	arch-meson "${pkgname}" build
+	ninja -C build
+}
+
+package() {
+	DESTDIR="${pkgdir}" ninja -C build install
+	install -Dm 644 "${pkgname}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
+
+apb_extra_repos=(
+  "extra-any::https://repo.wii-linux.org/arch/extra/any"
+  "extra::https://repo.wii-linux.org/arch/extra/$arch"
+)
+
