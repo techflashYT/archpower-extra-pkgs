@@ -3,8 +3,8 @@
 # Contributor: Dr-Noob <peibolms at gmail dot com>
 
 pkgname=cpufetch
-pkgver=1.06
-pkgrel=4
+pkgver=1.07
+pkgrel=1
 pkgdesc="Simple yet fancy CPU architecture fetching tool"
 arch=(x86_64 powerpc powerpc64 powerpc64le espresso)
 url="https://github.com/Dr-Noob/cpufetch"
@@ -12,20 +12,21 @@ license=(MIT)
 depends=(glibc)
 source=(
   "$pkgname-$pkgver.tar.gz::$url/archive/v$pkgver.tar.gz"
-  "fix-manpage-file-extension.patch::$url/commit/807a13d29ef0dfe5c27dfe9fe142695cafc98997.patch"
   "check-for-l2.patch"
+  "fix-ppc-build.patch"
 )
-sha256sums=('b8ec1339cf3a3bb9325cde7fb0748dd609043e8d2938c292956da7e457bdb7d9'
-            '74eed7e91633293694633ddf14678fb1f2e647faf466b2502309f5c69b2aeb6e'
-            '2af2dc1f3ac70d59586ede2930a49c517a01cb7bbbfe2a32f4abb173d0719a09')
+sha256sums=('dc3ec8f9c9d41d8434702a778cc150b196d5d178fd768a964f57d22f268a2c17'
+            '2af2dc1f3ac70d59586ede2930a49c517a01cb7bbbfe2a32f4abb173d0719a09'
+	    'b53112adb769ecb34f3c9d4921f580eb3eff3e3381ff8051a74be9a11d12ccad')
 
 prepare() {
   cd $pkgname-$pkgver
-  patch -Np1 < ../fix-manpage-file-extension.patch
   # cpufetch does not check for L2 cache, and will give an
   # assertion failure should it run on a CPU where it is
   # not present.  Patch this here.
   patch -Np1 < ../check-for-l2.patch
+  # https://github.com/Dr-Noob/cpufetch/pull/376
+  patch -Np1 < ../fix-ppc-build.patch
   sed -i 's/cpufetch-git/cpufetch/g' Makefile
 }
 
