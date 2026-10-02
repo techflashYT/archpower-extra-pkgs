@@ -1,0 +1,12 @@
+diff -ru SFML-3.1.0.orig/src/SFML/Network/CMakeLists.txt SFML-3.1.0/src/SFML/Network/CMakeLists.txt
+--- SFML-3.1.0.orig/src/SFML/Network/CMakeLists.txt	2026-08-05 14:50:51.592128175 +0200
++++ SFML-3.1.0/src/SFML/Network/CMakeLists.txt	2026-08-05 15:02:34.383099127 +0200
+@@ -130,6 +130,8 @@
+     target_compile_options(libssh2_static PRIVATE -w)
+ endif()
+ 
++target_include_directories(sfml-network PRIVATE ${MBEDTLS_INCLUDE_DIRS})
++target_link_directories(sfml-network PRIVATE ${MBEDTLS_LIBRARY_DIRS})
+ target_link_libraries(sfml-network PRIVATE libssh2::libssh2 mbedtls mbedcrypto mbedx509)
+ 
+ if(SFML_OS_WINDOWS)
