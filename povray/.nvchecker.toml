@@ -1,0 +1,6 @@
+[povray]
+source = "github"
+github = "POV-Ray/povray"
+include_regex = "v\\d+\\.\\d+\\.\\d+(\\.\\d{1,2})?"
+prefix = "v"
+use_max_tag = true
