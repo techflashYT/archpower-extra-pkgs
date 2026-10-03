@@ -1,0 +1,4 @@
+[opendoas]
+source = "git"
+git = "https://github.com/Duncaen/OpenDoas.git"
+prefix = "v"
