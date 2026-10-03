@@ -1,0 +1,18 @@
+--- a/lib/table.c	2012-03-24 13:00:49.000000000 -0500
++++ b/lib/table.c	2026-10-02 23:08:52.456386297 -0500
+@@ -297,10 +297,11 @@
+ }
+ 
+ int help_is_showing = 0;
+-static void help_nothing() { help_is_showing = 0; }
+-void (*help_redraw)(void) = help_nothing;
+-void (*help_click)(int x, int y, int b) = help_nothing;
+-void (*help_key)(int c, int x, int y) = help_nothing;
++static void help_nothing_redraw(void) { help_is_showing = 0; }
++static void help_nothing_clickkey(int d1, int d2, int d3) { help_is_showing = 0; }
++void (*help_redraw)(void) = help_nothing_redraw;
++void (*help_click)(int x, int y, int b) = help_nothing_clickkey;
++void (*help_key)(int c, int x, int y) = help_nothing_clickkey;
+ 
+ static int no_resize = 0;
+ void

@@ -1,0 +1,23 @@
+--- a/lib/make-imglib.c	2012-03-24 13:00:49.000000000 -0500
++++ b/lib/make-imglib.c	2026-10-02 23:16:36.797903907 -0500
+@@ -5,6 +5,7 @@
+ #include <sys/stat.h>
+ #include <unistd.h>
+ #include <dirent.h>
++#include <ctype.h>
+ 
+ #include <png.h>
+ 
+@@ -202,10 +203,10 @@
+   char *rv;
+   if (string) {
+     next = string;
+-    return;
++    return NULL;
+   }
+   while (*next && !isgraph(*next)) next++;
+-  if (!*next) return 0;
++  if (!*next) return NULL;
+   rv = next;
+   while (*next && isgraph(*next)) next++;
+   if (*next)

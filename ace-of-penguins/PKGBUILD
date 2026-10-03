@@ -1,0 +1,76 @@
+# Maintainer: kleintux <reg-archlinux AT klein DOT tuxli DOT ch> 
+# COntributor: Steven Honeyman <stevenhoneyman at gmail com>
+# Contributor: Antonio Bonifati
+# Contributor: renato 
+# Contributor: Spiros Georgaras <sng@hellug.gr> 
+pkgname=ace-of-penguins
+_pkgname=ace
+pkgver=1.4
+pkgrel=6
+pkgdesc="A set of Unix/X solitaire games."
+arch=('i686' 'x86_64' 'aarch64' 'powerpc' 'powerpc64' 'powerpc64le' 'espresso')
+url="https://www.delorie.com/store/ace/"
+license=('GPL')
+depends=('libx11' 'libxpm' 'libpng' 'zlib')
+optdepends=('xorg-fonts-100dpi: help support')
+source=("https://www.delorie.com/store/ace/$_pkgname-$pkgver.tar.gz"
+        "ace14_fixes.patch"
+				"badmatch.patch"
+        "canfield.desktop" 
+        "freecell.desktop" 
+        "golf.desktop"
+        "mastermind.desktop"
+        "merlin.desktop"
+        "minesweeper.desktop"
+        "pegged.desktop"
+        "penguins.desktop"
+        "solitaire.desktop" 
+        "spider.desktop"
+        "taipei.desktop"
+        "taipei-editor.desktop"
+        "thornq.desktop"
+        "update-configure.patch"
+	"fix-imagelib.patch"
+	"fix-table.patch"
+	"fix-make-imglib.patch"
+)
+md5sums=('b80169fa59d69758bb9686f31a84ad2b'
+         '0175e6cb3e51b71e4ad242aaf9d97086'
+         '9dd95179f01e019795d0532e29970967'
+         '10589ed7a16e62f128daf627aed08800'
+         '05f94f8737b2b5993c3d7b4acaea94a0'
+         '1cea6b83041c42061145776507aea602'
+         '1ae4b64e486df5ced772a6f05948229e'
+         '143977d4730d08d45af83695a545e15f'
+         'f53051130ad78fb1c44c386b38b4092f'
+         '6e97520466f05c46c7c64e09d760a190'
+         'fe008f0b52ecb549d3fecde5bbc34cea'
+         '40d2c37e9acde31af7a17d70c8191786'
+         'efffd817a86115b4ec2a42c1e6cf5af6'
+         '406c388089c52376dfc34a58f419c775'
+         '19fce2af99157a940454c868e9ed5c05'
+         'd0a6754557f06c0b49fba303705379c5'
+	 '99daf3b81df0370254c6a42f7e78be27'
+	 '1529d2279add878a743e40dd01d20206'
+	 '9f0b6b3149936bb02892a503b8e3a3ac'
+	 'f7ef826ddc312eda667b747191d1fee1')
+ 
+build() {
+  	cd "${srcdir}/${_pkgname}-${pkgver}"
+  	patch -p1 -i "${srcdir}"/ace14_fixes.patch
+  	patch -p1 -i "${srcdir}"/badmatch.patch
+	patch -p1 -i "${srcdir}"/update-configure.patch
+	patch -p1 -i "${srcdir}"/fix-imagelib.patch
+	patch -p1 -i "${srcdir}"/fix-table.patch
+	patch -p1 -i "${srcdir}"/fix-make-imglib.patch
+  	LDFLAGS="$LDFLAGS -lpng -lz -lm" ./configure --prefix=/usr
+  	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${pkgver}"
+	make DESTDIR="$pkgdir/" install-strip
+	for G in "${srcdir}"/*.desktop; do 
+	    install -Dm644 $G "${pkgdir}"/usr/share/applications/$(basename $G)
+	done
+}
