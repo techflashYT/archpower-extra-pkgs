@@ -1,0 +1,4 @@
+[binwalk]
+source = "git"
+git = "https://github.com/OSPG/binwalk.git"
+prefix = "v"

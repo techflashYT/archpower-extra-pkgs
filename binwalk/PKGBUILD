@@ -1,0 +1,67 @@
+# Maintainer: Levente Polyak <anthraxx[at]archlinux[dot]org>
+# Maintainer: Frederik Schwan <freswa at archlinux dot org>
+# Contributor: Peter Wu <peter@lekensteyn.nl>
+# Contributor: Miguel Revilla <yo@miguelrevilla.com>
+# Contributor: s1gma <s1gma@mindslicer.com>
+
+pkgname=binwalk
+pkgver=3.1.0
+pkgrel=1
+pkgdesc='Tool for searching a given binary image for embedded files'
+url='https://github.com/ReFirmLabs/binwalk'
+arch=(x86_64 powerpc64 powerpc64le)
+license=(MIT)
+depends=(
+  bzip2
+  freetype2
+  fontconfig
+  libgcc
+  xz
+)
+makedepends=(
+  rust
+)
+optdepends=(
+  'python-opengl: binviz module support'
+  'python-capstone: disassembly support'
+  'python-matplotlib: entropy plotting'
+  'python-pyqtgraph: entropy plotting'
+  'python-numpy: entropy module'
+  'python-numba: entropy module'
+  'python-gnupg: pgp plugin'
+  'arj: ARJ decompression support'
+  'cabextract: CAB archive support'
+  'cpio: CPIO archive support'
+  'gzip: GZIP decompression support'
+  'mtd-utils: JFFS filesystem support'
+  'p7zip: ZIP, LZMA and ISO decompression support'
+  'squashfs-tools: squashfs support'
+  'tar: TAR archive support'
+  'unrar: RAR decompression support'
+  'lhasa: LHA support'
+  'sleuthkit: forensic analysis support'
+)
+source=(
+  "${url}/archive/v${pkgver}/${pkgname}-${pkgver}.tar.gz"
+)
+sha512sums=('ebed0d260252a18d32af3d24ef7414df656eaa619fbd0327bdd4a9e104654e348dc5cb093d2627258c5839682cfb30bba33f54b91e7e10c1e513f9ceb8509aa7')
+b2sums=('021384121d961775172c282775ed78a783e2eaba1a0c2a7eb4f98e2fc6fcfaa9e11ef419aba9fa2eb8f350eba327e31cc8adc31b92ef48b6134c9ecab1a3a396')
+
+prepare() {
+  cd ${pkgname}-${pkgver}
+  cargo fetch --locked --target "$(rustc --print host-tuple)"
+}
+
+
+build() {
+  cd ${pkgname}-${pkgver}
+  cargo build --release --locked
+}
+
+package() {
+  cd ${pkgname}-${pkgver}
+  install -Dm755 -t "${pkgdir}"/usr/bin target/release/binwalk
+  install -Dm 644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
+}
+
+# vim: ts=2 sw=2 et:
