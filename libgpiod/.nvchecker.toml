@@ -1,0 +1,4 @@
+[libgpiod]
+source = "git"
+git = "https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git"
+prefix = "v"
