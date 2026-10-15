@@ -1,0 +1,4 @@
+[python-evdev]
+source = "git"
+git = "https://github.com/gvalkov/python-evdev.git"
+prefix = "v"
