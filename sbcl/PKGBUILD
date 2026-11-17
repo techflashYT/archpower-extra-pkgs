@@ -43,8 +43,13 @@ build() {
   if [ "${CARCH}" = "x86_64" ] || [ "${CARCH}" = "aarch64" ]; then
     makeflags+=(--with-sb-simd)
   fi
+  
+  # force ppc64 build on BE power64
+  if [ "${CARCH}" = "powerpc64" ]; then
+    makeflags+=(--arch=ppc64)
+  fi
 
-  sh make.sh $hostlisp "${makeflags[0]}"
+  sh make.sh $hostlisp "${makeflags[@]}"
 
   make -C doc/manual info
 }
