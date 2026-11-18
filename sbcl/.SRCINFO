@@ -1,0 +1,23 @@
+pkgbase = sbcl
+	pkgdesc = Steel Bank Common Lisp
+	pkgver = 2.6.10
+	pkgrel = 1
+	url = https://www.sbcl.org/
+	arch = powerpc
+	arch = powerpc64
+	arch = powerpc64le
+	license = BSD-2-Clause
+	license = BSD-3-Clause
+	license = Xerox
+	license = LOOP
+	makedepends = clisp
+	depends = zlib
+	depends = zstd
+	provides = common-lisp
+	provides = cl-asdf
+	source = https://downloads.sourceforge.net/project/sbcl/sbcl/2.6.10/sbcl-2.6.10-source.tar.bz2
+	source = arch-fixes.lisp
+	sha256sums = c23eac1d0aa9ae0add7eb741f3c91b816f5ce216147f37b99da1578e5261b17c
+	sha256sums = b5a6468dcbc1012cae2c3cda155762a37b6d96ef89bba4f723315063b0b5e7ce
+
+pkgname = sbcl
