@@ -8,7 +8,8 @@ pkgname=sbcl
 pkgver=2.6.10
 pkgrel=1
 pkgdesc='Steel Bank Common Lisp'
-arch=(powerpc powerpc64 powerpc64le) # compiler does not support espresso
+# compiler does not support espresso
+arch=(powerpc powerpc64 powerpc64le)
 url='https://www.sbcl.org/'
 license=(BSD-2-Clause BSD-3-Clause Xerox LOOP)
 depends=(zlib zstd)
